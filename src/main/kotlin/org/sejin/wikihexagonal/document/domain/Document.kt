@@ -18,14 +18,14 @@ data class Document(
         snapshots.add(amendedVersionSnapshot)
     }
 
+    fun getLatestSnapshot(): DocumentSnapshot =
+        this.snapshots.last()
+
     private fun getTitle(): String =
         getLatestSnapshot().title
 
     private fun getContent(): String =
         getLatestSnapshot().content
-
-    private fun getLatestSnapshot(): DocumentSnapshot =
-        this.snapshots.last()
 
     companion object {
         fun write(

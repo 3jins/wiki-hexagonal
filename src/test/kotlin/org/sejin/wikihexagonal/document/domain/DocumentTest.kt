@@ -93,8 +93,28 @@ internal class DocumentTest {
 
     }
 
-    @DisplayName("render")
+    @DisplayName("getLatestSnapshot")
     @Nested
-    inner class RenderTest {
+    inner class GetLatestSnapshotTest {
+        @DisplayName("should get the latest snapshot")
+        @Test
+        fun shouldGetTheLatestSnapshot() {
+            // given
+            val document: Document = documentWithFullData()
+
+            document.amend(
+                title = faker.heroesOfTheStorm.heroes(),
+                content = faker.heroesOfTheStorm.quotes(),
+            )
+
+            // when
+            val latestSnapshot: DocumentSnapshot = document.getLatestSnapshot()
+
+            // then
+            latestSnapshot.title.shouldBeEqualTo(document.snapshots.last().title)
+            latestSnapshot.content.shouldBeEqualTo(document.snapshots.last().content)
+            latestSnapshot.title.shouldNotBeEqualTo(document.snapshots.first().title)
+            latestSnapshot.content.shouldNotBeEqualTo(document.snapshots.first().content)
+        }
     }
 }

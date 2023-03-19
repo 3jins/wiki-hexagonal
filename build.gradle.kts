@@ -22,9 +22,11 @@ repositories {
 dependencies {
 	val kotlinFakerVersion = "1.13.0"
 	val kluentVersion = "1.72"
+	val markdownVersion = "0.4.1"
 
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains:markdown:$markdownVersion")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("io.github.serpro69:kotlin-faker:$kotlinFakerVersion")
