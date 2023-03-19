@@ -4,8 +4,29 @@ import java.time.LocalDateTime
 
 data class Document(
 //    val author: Member,
-    val snapshots: List<DocumentSnapshot>,
+    val snapshots: MutableList<DocumentSnapshot>,
 ) {
+    fun amend(
+        title: String = getTitle(),
+        content: String = getContent(),
+    ) {
+        val latestSnapshot: DocumentSnapshot = getLatestSnapshot()
+        val amendedVersionSnapshot: DocumentSnapshot = latestSnapshot.copy(
+            title = title,
+            content = content,
+        )
+        snapshots.add(amendedVersionSnapshot)
+    }
+
+    private fun getTitle(): String =
+        getLatestSnapshot().title
+
+    private fun getContent(): String =
+        getLatestSnapshot().content
+
+    private fun getLatestSnapshot(): DocumentSnapshot =
+        this.snapshots.last()
+
     companion object {
         fun write(
             title: String,
@@ -18,7 +39,7 @@ data class Document(
             )
 
             return Document(
-                snapshots = listOf(documentSnapshot),
+                snapshots = mutableListOf(documentSnapshot),
             )
         }
     }

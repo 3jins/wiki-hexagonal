@@ -1,9 +1,6 @@
 package org.sejin.wikihexagonal.document.domain
 
-import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldBeOnOrBefore
-import org.amshove.kluent.shouldHaveSingleItem
-import org.amshove.kluent.shouldNotBeNull
+import org.amshove.kluent.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -49,7 +46,45 @@ internal class DocumentTest {
     @DisplayName("amend")
     @Nested
     inner class AmendTest {
+        @DisplayName("should be updated when valid data are given")
+        @Test
+        fun shouldBeUpdatedWithValidData() {
+            val document: Document = documentWithFullData()
 
+            assertDoesNotThrow {
+                document.amend(
+                    content = faker.onePiece.quotes(),
+                )
+            }
+        }
+
+        @DisplayName("should add a snapshot when a document is amended")
+        @Test
+        fun shouldAddSnapshot() {
+            val document: Document = documentWithFullData()
+
+            document.amend(
+                content = faker.onePiece.quotes(),
+            )
+
+            document.snapshots.shouldHaveSize(2)
+        }
+
+        @DisplayName("should update only with given data")
+        @Test
+        fun shouldBeUpdatedOnlyWithGivenData() {
+            val document: Document = Document.write(
+                title = faker.onePiece.characters(),
+                content = faker.onePiece.quotes(),
+            )
+
+            document.amend(
+                content = faker.heroesOfTheStorm.quotes(),
+            )
+
+            document.snapshots[0].title.shouldBeEqualTo(document.snapshots[1].title)
+            document.snapshots[0].content.shouldNotBeEqualTo(document.snapshots[1].content)
+        }
     }
 
     @DisplayName("delete")
