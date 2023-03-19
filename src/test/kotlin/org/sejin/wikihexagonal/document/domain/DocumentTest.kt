@@ -23,6 +23,7 @@ internal class DocumentTest {
             )
 
             document.shouldNotBeNull()
+            document.status.shouldBeEqualTo(DocumentStatus.ON_DISPLAY)
         }
 
         @DisplayName("should leave a snapshot when a new document is written")
@@ -90,7 +91,15 @@ internal class DocumentTest {
     @DisplayName("delete")
     @Nested
     inner class DeleteTest {
+        @DisplayName("should be soft deleted")
+        @Test
+        fun shouldGetTheLatestSnapshot() {
+            val document: Document = documentWithFullData()
 
+            document.delete()
+
+            document.status.shouldBeEqualTo(DocumentStatus.DELETED)
+        }
     }
 
     @DisplayName("getLatestSnapshot")

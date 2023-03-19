@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 
 data class Document(
 //    val author: Member,
+    var status: DocumentStatus,
     val snapshots: MutableList<DocumentSnapshot>,
 ) {
     fun amend(
@@ -16,6 +17,10 @@ data class Document(
             content = content,
         )
         snapshots.add(amendedVersionSnapshot)
+    }
+
+    fun delete() {
+       this.status = DocumentStatus.DELETED
     }
 
     fun getLatestSnapshot(): DocumentSnapshot =
@@ -39,6 +44,7 @@ data class Document(
             )
 
             return Document(
+                status = DocumentStatus.ON_DISPLAY,
                 snapshots = mutableListOf(documentSnapshot),
             )
         }
