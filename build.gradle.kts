@@ -23,6 +23,7 @@ dependencies {
 	val kotlinFakerVersion = "1.13.0"
 	val kluentVersion = "1.72"
 	val markdownVersion = "0.4.1"
+	val mockkVersion = "1.13.3"
 
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -31,6 +32,7 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("io.github.serpro69:kotlin-faker:$kotlinFakerVersion")
 	testImplementation("org.amshove.kluent:kluent:$kluentVersion")
+	testImplementation("io.mockk:mockk:$mockkVersion")
 }
 
 tasks.withType<KotlinCompile> {
