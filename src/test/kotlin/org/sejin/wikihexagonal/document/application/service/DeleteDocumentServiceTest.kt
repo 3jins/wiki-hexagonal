@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.sejin.wikihexagonal.document.application.port.`in`.DeleteDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.out.DeleteDocumentPort
-import org.sejin.wikihexagonal.document.application.port.out.LoadDocumentPort
+import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
 
 @DisplayName("DeleteDocumentService")
 internal class DeleteDocumentServiceTest {
-    private val loadDocumentPort: LoadDocumentPort = mockk(relaxed = true)
+    private val readDocumentPort: ReadDocumentPort = mockk(relaxed = true)
     private val deleteDocumentPort: DeleteDocumentPort = mockk(relaxed = true)
 
     private val deleteDocumentUseCase: DeleteDocumentUseCase = DeleteDocumentService(
-        loadDocumentPort,
+        readDocumentPort,
         deleteDocumentPort,
     )
 
@@ -29,7 +29,7 @@ internal class DeleteDocumentServiceTest {
         val fakeDocumentId: Long = faker.random.nextLong()
 
         every {
-            loadDocumentPort.loadDocument(eq(fakeDocumentId))
+            readDocumentPort.loadDocument(eq(fakeDocumentId))
         }.returns(documentWithFullData())
 
         deleteDocumentUseCase.deleteDocument(documentId = fakeDocumentId)
@@ -41,7 +41,7 @@ internal class DeleteDocumentServiceTest {
     @Test
     fun shouldFailIfTargetDocumentDoesNotExist() {
         every {
-            loadDocumentPort.loadDocument(any())
+            readDocumentPort.loadDocument(any())
         } returns null
 
         assertThrows<IllegalStateException> {

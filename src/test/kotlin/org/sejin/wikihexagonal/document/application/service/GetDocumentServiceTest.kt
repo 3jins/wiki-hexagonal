@@ -8,16 +8,16 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.sejin.wikihexagonal.document.application.port.`in`.GetDocumentUseCase
-import org.sejin.wikihexagonal.document.application.port.out.LoadDocumentPort
+import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.domain.*
 import org.sejin.wikihexagonal.faker
 
 @DisplayName("GetDocumentService")
 internal class GetDocumentServiceTest {
-    private val loadDocumentPort: LoadDocumentPort = mockk(relaxed = true)
+    private val readDocumentPort: ReadDocumentPort = mockk(relaxed = true)
 
     private val getDocumentUseCase: GetDocumentUseCase = GetDocumentService(
-        loadDocumentPort,
+        readDocumentPort,
     )
 
     @DisplayName("should get the matching document")
@@ -28,7 +28,7 @@ internal class GetDocumentServiceTest {
         val fakeDocument: Document = documentWithFullData()
 
         every {
-            loadDocumentPort.loadDocument(eq(fakeDocumentId))
+            readDocumentPort.loadDocument(eq(fakeDocumentId))
         }.returns(fakeDocument)
 
         // when
@@ -44,7 +44,7 @@ internal class GetDocumentServiceTest {
     @Test
     fun shouldFailIfTargetDocumentDoesNotExist() {
         every {
-            loadDocumentPort.loadDocument(any())
+            readDocumentPort.loadDocument(any())
         } returns null
 
         assertThrows<IllegalStateException> {
