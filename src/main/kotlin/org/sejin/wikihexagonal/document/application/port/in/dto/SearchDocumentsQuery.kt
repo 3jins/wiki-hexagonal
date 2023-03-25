@@ -1,4 +1,4 @@
-package org.sejin.wikihexagonal.document.application.port.`in`
+package org.sejin.wikihexagonal.document.application.port.`in`.dto
 
 import org.sejin.wikihexagonal.document.domain.DocumentStatus
 

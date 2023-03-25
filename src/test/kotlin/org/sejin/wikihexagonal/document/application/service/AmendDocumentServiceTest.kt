@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentCommand
+import org.sejin.wikihexagonal.document.application.port.`in`.dto.AmendDocumentCommand
 import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.out.AmendDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort

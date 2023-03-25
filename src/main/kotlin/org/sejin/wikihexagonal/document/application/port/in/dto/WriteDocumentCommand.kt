@@ -1,4 +1,4 @@
-package org.sejin.wikihexagonal.document.application.port.`in`
+package org.sejin.wikihexagonal.document.application.port.`in`.dto
 
 data class WriteDocumentCommand(
     val title: String,

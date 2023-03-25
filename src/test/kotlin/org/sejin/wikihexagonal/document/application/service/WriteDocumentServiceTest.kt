@@ -6,7 +6,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.sejin.wikihexagonal.document.application.port.`in`.WriteDocumentCommand
+import org.sejin.wikihexagonal.document.application.port.`in`.dto.WriteDocumentCommand
 import org.sejin.wikihexagonal.document.application.port.`in`.WriteDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentPort
 import org.sejin.wikihexagonal.faker

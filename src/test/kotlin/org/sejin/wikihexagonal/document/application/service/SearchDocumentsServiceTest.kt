@@ -7,7 +7,7 @@ import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import org.sejin.wikihexagonal.document.application.port.`in`.SearchDocumentsQuery
+import org.sejin.wikihexagonal.document.application.port.`in`.dto.SearchDocumentsQuery
 import org.sejin.wikihexagonal.document.application.port.`in`.SearchDocumentsUseCase
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.domain.Document

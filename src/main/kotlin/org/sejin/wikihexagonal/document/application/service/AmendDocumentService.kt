@@ -1,6 +1,6 @@
 package org.sejin.wikihexagonal.document.application.service
 
-import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentCommand
+import org.sejin.wikihexagonal.document.application.port.`in`.dto.AmendDocumentCommand
 import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.out.AmendDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
