@@ -6,10 +6,22 @@ import org.intellij.markdown.parser.MarkdownParser
 import java.time.LocalDateTime
 
 data class DocumentSnapshot(
+    val id: DocumentSnapshotId?,
     val title: String,
     val content: String,
     val createdAt: LocalDateTime,
 ) {
+    fun amend(
+        title: String = this.title,
+        content: String = this.content,
+    ): DocumentSnapshot {
+        return this.copy(
+            title = title,
+            content = content,
+            createdAt = LocalDateTime.now(),
+        )
+    }
+
     fun renderContent(): String {
         val flavour = GFMFlavourDescriptor()
         val parsedTree = MarkdownParser(flavour = flavour).buildMarkdownTreeFromString(this.content)
@@ -20,4 +32,22 @@ data class DocumentSnapshot(
             flavour = flavour,
         ).generateHtml()
     }
+
+    companion object {
+        fun write(
+            title: String,
+            content: String,
+        ): DocumentSnapshot {
+            return DocumentSnapshot(
+                id = null,
+                title = title,
+                content = content,
+                createdAt = LocalDateTime.now(),
+            )
+        }
+    }
 }
+
+data class DocumentSnapshotId(
+    val value: Long,
+)

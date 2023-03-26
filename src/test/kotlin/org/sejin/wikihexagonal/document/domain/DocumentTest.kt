@@ -23,6 +23,7 @@ internal class DocumentTest {
             )
 
             document.shouldNotBeNull()
+            document.id.shouldBeNull()
             document.status.shouldBeEqualTo(DocumentStatus.ON_DISPLAY)
         }
 
@@ -51,12 +52,14 @@ internal class DocumentTest {
         @Test
         fun shouldBeUpdatedWithValidData() {
             val document: Document = documentWithFullData()
+            val originalId = document.id
 
             assertDoesNotThrow {
                 document.amend(
-                    content = faker.onePiece.quotes(),
+                    documentSnapshot = documentSnapshotWithFullData()
                 )
             }
+            document.id.shouldBeEqualTo(originalId)
         }
 
         @DisplayName("should add a snapshot when a document is amended")
@@ -65,26 +68,10 @@ internal class DocumentTest {
             val document: Document = documentWithFullData()
 
             document.amend(
-                content = faker.onePiece.quotes(),
+                documentSnapshot = documentSnapshotWithFullData()
             )
 
             document.snapshots.shouldHaveSize(2)
-        }
-
-        @DisplayName("should update only with given data")
-        @Test
-        fun shouldBeUpdatedOnlyWithGivenData() {
-            val document: Document = Document.write(
-                title = faker.onePiece.characters(),
-                content = faker.onePiece.quotes(),
-            )
-
-            document.amend(
-                content = faker.heroesOfTheStorm.quotes(),
-            )
-
-            document.snapshots[0].title.shouldBeEqualTo(document.snapshots[1].title)
-            document.snapshots[0].content.shouldNotBeEqualTo(document.snapshots[1].content)
         }
     }
 
@@ -112,8 +99,10 @@ internal class DocumentTest {
             val document: Document = documentWithFullData()
 
             document.amend(
-                title = faker.heroesOfTheStorm.heroes(),
-                content = faker.heroesOfTheStorm.quotes(),
+                documentSnapshot = documentSnapshot(
+                    title = faker.heroesOfTheStorm.heroes(),
+                    content = faker.heroesOfTheStorm.quotes(),
+                )
             )
 
             // when

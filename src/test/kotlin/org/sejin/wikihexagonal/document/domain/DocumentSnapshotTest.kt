@@ -1,14 +1,68 @@
 package org.sejin.wikihexagonal.document.domain
 
-import org.amshove.kluent.shouldContain
-import org.junit.jupiter.api.Test
-
+import org.amshove.kluent.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import org.sejin.wikihexagonal.faker
+import java.time.LocalDateTime
 
 @DisplayName("DocumentSnapshot")
 internal class DocumentSnapshotTest {
+    @DisplayName("write")
+    @Nested
+    inner class WriteTest {
+        @DisplayName("should be written when valid data are given")
+        @Test
+        fun shouldBeWrittenWithValidData() {
+            val fakeTitle = faker.onePiece.characters()
+            val fakeContent = faker.onePiece.quotes()
+
+            val documentSnapshot: DocumentSnapshot = DocumentSnapshot.write(
+                title = fakeTitle,
+                content = fakeContent,
+            )
+
+            documentSnapshot.shouldNotBeNull()
+            documentSnapshot.id.shouldBeNull()
+            documentSnapshot.title.shouldBeEqualTo(fakeTitle)
+            documentSnapshot.content.shouldBeEqualTo(fakeContent)
+        }
+    }
+
+    @DisplayName("amend")
+    @Nested
+    inner class AmendTest {
+        @DisplayName("should be updated when valid data are given")
+        @Test
+        fun shouldBeUpdatedWithValidData() {
+            val documentSnapshot: DocumentSnapshot = documentSnapshotWithFullData()
+            val originalId = documentSnapshot.id
+
+            assertDoesNotThrow {
+                documentSnapshot.amend(
+                    content = faker.onePiece.quotes(),
+                )
+            }
+            documentSnapshot.id.shouldBeEqualTo(originalId)
+        }
+
+        @DisplayName("should update only with given data")
+        @Test
+        fun shouldBeUpdatedOnlyWithGivenData() {
+            val documentSnapshot: DocumentSnapshot = DocumentSnapshot.write(
+                title = faker.onePiece.characters(),
+                content = faker.onePiece.quotes(),
+            )
+
+            val amendedVersionSnapshot = documentSnapshot.amend(
+                content = faker.heroesOfTheStorm.quotes(),
+            )
+            amendedVersionSnapshot.title.shouldBeEqualTo(documentSnapshot.title)
+            amendedVersionSnapshot.content.shouldNotBeEqualTo(documentSnapshot.content)
+        }
+    }
 
     @DisplayName("render")
     @Nested
