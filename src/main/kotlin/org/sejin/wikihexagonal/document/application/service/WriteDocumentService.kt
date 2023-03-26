@@ -10,6 +10,7 @@ class WriteDocumentService(
 ) : WriteDocumentUseCase {
     override fun writeDocument(command: WriteDocumentCommand) {
         val document: Document = Document.write(
+            authorId = command.memberId,
             title = command.title,
             content = command.content,
         )
