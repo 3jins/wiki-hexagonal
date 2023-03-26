@@ -24,7 +24,7 @@ internal class GetDocumentServiceTest {
     @Test
     fun shouldGetMatchingDocument() {
         // given
-        val fakeDocumentId: Long = faker.random.nextLong()
+        val fakeDocumentId: DocumentId = faker.randomProvider.randomClassInstance()
         val fakeDocument: Document = documentWithFullData()
 
         every {
@@ -48,7 +48,7 @@ internal class GetDocumentServiceTest {
         } returns null
 
         assertThrows<IllegalStateException> {
-            getDocumentUseCase.getDocument(faker.random.nextLong())
+            getDocumentUseCase.getDocument(faker.randomProvider.randomClassInstance())
         }
     }
 }

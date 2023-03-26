@@ -60,11 +60,7 @@ internal class SearchDocumentsServiceTest {
 
         // when
         val documents: List<Document> = searchDocumentsUseCase.searchDocuments(
-            SearchDocumentsQuery(
-                status = DocumentStatus.ON_DISPLAY,
-                title = faker.clashOfClans.troops(),
-                content = faker.clashOfClans.ranks(),
-            )
+            query = faker.randomProvider.randomClassInstance(),
         )
 
         // then
