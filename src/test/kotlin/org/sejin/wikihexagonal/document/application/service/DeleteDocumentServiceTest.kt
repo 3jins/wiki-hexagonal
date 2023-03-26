@@ -11,6 +11,7 @@ import org.junit.jupiter.api.assertThrows
 import org.sejin.wikihexagonal.document.application.port.`in`.DeleteDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
+import org.sejin.wikihexagonal.document.domain.DocumentId
 import org.sejin.wikihexagonal.document.domain.DocumentStatus
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
@@ -28,7 +29,7 @@ internal class DeleteDocumentServiceTest {
     @DisplayName("should delete a matching document")
     @Test
     fun shouldDeleteMatchingDocument() {
-        val fakeDocumentId: Long = faker.random.nextLong()
+        val fakeDocumentId: DocumentId = faker.randomProvider.randomClassInstance()
 
         every {
             readDocumentPort.loadDocument(eq(fakeDocumentId))
@@ -56,7 +57,7 @@ internal class DeleteDocumentServiceTest {
         } returns null
 
         assertThrows<IllegalStateException> {
-            deleteDocumentUseCase.deleteDocument(documentId = faker.random.nextLong())
+            deleteDocumentUseCase.deleteDocument(documentId = faker.randomProvider.randomClassInstance())
         }
     }
 }

@@ -4,12 +4,13 @@ import org.sejin.wikihexagonal.document.application.port.`in`.DeleteDocumentUseC
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.domain.Document
+import org.sejin.wikihexagonal.document.domain.DocumentId
 
 class DeleteDocumentService(
     private val readDocumentPort: ReadDocumentPort,
     private val updateDocumentPort: UpdateDocumentPort,
 ) : DeleteDocumentUseCase {
-    override fun deleteDocument(documentId: Long) {
+    override fun deleteDocument(documentId: DocumentId) {
         val document: Document = checkNotNull(
             readDocumentPort.loadDocument(documentId = documentId),
         ) { "Document(id = ${documentId}) does not exist." }

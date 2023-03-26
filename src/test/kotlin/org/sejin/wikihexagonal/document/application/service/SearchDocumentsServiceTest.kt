@@ -15,6 +15,8 @@ import org.sejin.wikihexagonal.document.domain.DocumentStatus
 import org.sejin.wikihexagonal.document.domain.document
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.member.domain.MemberId
+import org.sejin.wikihexagonal.member.domain.memberWithFullData
 
 @DisplayName("SearchDocumentsService")
 internal class SearchDocumentsServiceTest {
@@ -28,6 +30,10 @@ internal class SearchDocumentsServiceTest {
     @Test
     fun shouldGetDocumentsMatchingGivenQuery() {
         // given
+        val fakeMemberIds: List<MemberId> = listOf(
+            faker.randomProvider.randomClassInstance(),
+            faker.randomProvider.randomClassInstance(),
+        )
         val fakeTitles: List<String> = listOf(
             faker.onePiece.characters(),
             faker.heroesOfTheStorm.heroes(),
@@ -46,11 +52,13 @@ internal class SearchDocumentsServiceTest {
         }.returns(
             listOf(
                 document(
+                    authorId = fakeMemberIds[0],
                     status = fakeStatuses[0],
                     title = fakeTitles[0],
                     content = fakeContents[0],
                 ),
                 document(
+                    authorId = fakeMemberIds[1],
                     status = fakeStatuses[1],
                     title = fakeTitles[1],
                     content = fakeContents[1],
@@ -60,11 +68,7 @@ internal class SearchDocumentsServiceTest {
 
         // when
         val documents: List<Document> = searchDocumentsUseCase.searchDocuments(
-            SearchDocumentsQuery(
-                status = DocumentStatus.ON_DISPLAY,
-                title = faker.clashOfClans.troops(),
-                content = faker.clashOfClans.ranks(),
-            )
+            query = faker.randomProvider.randomClassInstance(),
         )
 
         // then
@@ -90,6 +94,7 @@ internal class SearchDocumentsServiceTest {
         // when
         val documents: List<Document> = searchDocumentsUseCase.searchDocuments(
             SearchDocumentsQuery(
+                authorId = null,
                 status = null,
                 title = faker.clashOfClans.troops(),
                 content = null,

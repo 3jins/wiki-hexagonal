@@ -10,9 +10,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.`in`.dto.AmendDocumentCommand
-import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentSnapshotPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
+import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
+import org.sejin.wikihexagonal.document.domain.DocumentId
 import org.sejin.wikihexagonal.document.domain.documentSnapshot
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
@@ -33,7 +34,7 @@ internal class AmendDocumentServiceTest {
     @Test
     fun shouldAmendMatchingDocumentWithGivenCommand() {
         // given
-        val fakeDocumentId: Long = faker.random.nextLong()
+        val fakeDocumentId: DocumentId = faker.randomProvider.randomClassInstance()
         val fakeTitle: String = faker.heroesOfTheStorm.heroes()
         val fakeContent: String = faker.heroesOfTheStorm.quotes()
 
@@ -90,7 +91,7 @@ internal class AmendDocumentServiceTest {
         assertThrows<IllegalStateException> {
             amendDocumentUseCase.amendDocument(
                 AmendDocumentCommand(
-                    documentId = faker.random.nextLong(),
+                    documentId = faker.randomProvider.randomClassInstance(),
                     title = faker.heroesOfTheStorm.heroes(),
                     content = faker.heroesOfTheStorm.quotes(),
                 )

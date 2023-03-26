@@ -1,7 +1,10 @@
 package org.sejin.wikihexagonal.document.domain
 
+import org.sejin.wikihexagonal.member.domain.MemberId
+
 data class Document(
     val id: DocumentId?,
+    val authorId: MemberId,
     val status: DocumentStatus,
     val snapshots: List<DocumentSnapshot>,
 ) {
@@ -22,6 +25,7 @@ data class Document(
 
     companion object {
         fun write(
+            authorId: MemberId,
             title: String,
             content: String,
         ): Document {
@@ -32,6 +36,7 @@ data class Document(
 
             return Document(
                 id = null,
+                authorId = authorId,
                 status = DocumentStatus.ON_DISPLAY,
                 snapshots = listOf(documentSnapshot),
             )
