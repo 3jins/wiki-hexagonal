@@ -1,52 +1,44 @@
 package org.sejin.wikihexagonal.document.domain
 
-import java.time.LocalDateTime
-
 data class Document(
-//    val author: Member,
-    var status: DocumentStatus,
-    val snapshots: MutableList<DocumentSnapshot>,
+    val id: DocumentId?,
+    val status: DocumentStatus,
+    val snapshots: List<DocumentSnapshot>,
 ) {
-    fun amend(
-        title: String = getTitle(),
-        content: String = getContent(),
-    ) {
-        val latestSnapshot: DocumentSnapshot = getLatestSnapshot()
-        val amendedVersionSnapshot: DocumentSnapshot = latestSnapshot.copy(
-            title = title,
-            content = content,
+    fun amend(documentSnapshot: DocumentSnapshot): Document {
+        return this.copy(
+            snapshots = snapshots.plus(documentSnapshot)
         )
-        snapshots.add(amendedVersionSnapshot)
     }
 
-    fun delete() {
-       this.status = DocumentStatus.DELETED
+    fun delete(): Document {
+        return this.copy(
+            status = DocumentStatus.DELETED
+        )
     }
 
     fun getLatestSnapshot(): DocumentSnapshot =
         this.snapshots.last()
-
-    private fun getTitle(): String =
-        getLatestSnapshot().title
-
-    private fun getContent(): String =
-        getLatestSnapshot().content
 
     companion object {
         fun write(
             title: String,
             content: String,
         ): Document {
-            val documentSnapshot = DocumentSnapshot(
+            val documentSnapshot = DocumentSnapshot.write(
                 title = title,
                 content = content,
-                createdAt = LocalDateTime.now(),
             )
 
             return Document(
+                id = null,
                 status = DocumentStatus.ON_DISPLAY,
-                snapshots = mutableListOf(documentSnapshot),
+                snapshots = listOf(documentSnapshot),
             )
         }
     }
 }
+
+data class DocumentId(
+    val value: Long,
+)

@@ -1,7 +1,6 @@
 package org.sejin.wikihexagonal.document.domain
 
 import org.sejin.wikihexagonal.faker
-import java.time.LocalDateTime
 
 @DslMarker
 annotation class DocumentDsl
@@ -22,6 +21,7 @@ fun document(
 
 @DocumentDsl
 data class DocumentBuilder(
+    val id: DocumentId,
     var status: DocumentStatus,
     var title: String,
     var content: String,
@@ -41,17 +41,17 @@ data class DocumentBuilder(
     }
 
     fun buildWithWrite() = Document.write(
-        title = title,
-        content = content,
+        title = this.title,
+        content = this.content,
     )
 
     fun build() = Document(
-        status = status,
-        snapshots = mutableListOf(
-            DocumentSnapshot(
-                title = title,
-                content = content,
-                createdAt = LocalDateTime.now(),
+        id = this.id,
+        status = this.status,
+        snapshots = listOf(
+            DocumentSnapshot.write(
+                title = this.title,
+                content = this.content,
             )
         ),
     )
