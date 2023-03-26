@@ -48,7 +48,7 @@ data class DocumentBuilder(
     fun build() = Document(
         id = this.id,
         status = this.status,
-        snapshots = mutableListOf(
+        snapshots = listOf(
             DocumentSnapshot.write(
                 title = this.title,
                 content = this.content,

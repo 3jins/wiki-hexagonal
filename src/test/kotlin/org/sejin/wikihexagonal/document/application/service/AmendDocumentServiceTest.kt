@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.`in`.dto.AmendDocumentCommand
-import org.sejin.wikihexagonal.document.application.port.out.AmendDocumentPort
+import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentSnapshotPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.domain.documentSnapshot
@@ -20,12 +20,12 @@ import org.sejin.wikihexagonal.faker
 @DisplayName("AmendDocumentService")
 internal class AmendDocumentServiceTest {
     private val readDocumentPort: ReadDocumentPort = mockk(relaxed = true)
-    private val amendDocumentPort: AmendDocumentPort = mockk(relaxed = true)
+    private val updateDocumentPort: UpdateDocumentPort = mockk(relaxed = true)
     private val createDocumentSnapshotPort: CreateDocumentSnapshotPort = mockk(relaxed = true)
 
     private val amendDocumentUseCase: AmendDocumentUseCase = AmendDocumentService(
         readDocumentPort,
-        amendDocumentPort,
+        updateDocumentPort,
         createDocumentSnapshotPort,
     )
 
@@ -68,7 +68,7 @@ internal class AmendDocumentServiceTest {
                 }
             )
 
-            amendDocumentPort.amendDocument(
+            updateDocumentPort.updateDocument(
                 withArg {
                     it.shouldBeEqualTo(fakeDocumentId)
                 },

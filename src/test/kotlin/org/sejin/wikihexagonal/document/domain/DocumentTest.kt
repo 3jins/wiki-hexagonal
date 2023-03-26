@@ -67,11 +67,11 @@ internal class DocumentTest {
         fun shouldAddSnapshot() {
             val document: Document = documentWithFullData()
 
-            document.amend(
+            val amendedDocument: Document = document.amend(
                 documentSnapshot = documentSnapshotWithFullData()
             )
 
-            document.snapshots.shouldHaveSize(2)
+            amendedDocument.snapshots.shouldHaveSize(2)
         }
     }
 
@@ -83,9 +83,9 @@ internal class DocumentTest {
         fun shouldGetTheLatestSnapshot() {
             val document: Document = documentWithFullData()
 
-            document.delete()
+            val deletedDocument: Document = document.delete()
 
-            document.status.shouldBeEqualTo(DocumentStatus.DELETED)
+            deletedDocument.status.shouldBeEqualTo(DocumentStatus.DELETED)
         }
     }
 
@@ -96,9 +96,7 @@ internal class DocumentTest {
         @Test
         fun shouldGetTheLatestSnapshot() {
             // given
-            val document: Document = documentWithFullData()
-
-            document.amend(
+            val document: Document = documentWithFullData().amend(
                 documentSnapshot = documentSnapshot(
                     title = faker.heroesOfTheStorm.heroes(),
                     content = faker.heroesOfTheStorm.quotes(),

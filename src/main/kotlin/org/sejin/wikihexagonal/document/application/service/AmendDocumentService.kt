@@ -2,7 +2,7 @@ package org.sejin.wikihexagonal.document.application.service
 
 import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.`in`.dto.AmendDocumentCommand
-import org.sejin.wikihexagonal.document.application.port.out.AmendDocumentPort
+import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentSnapshotPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.domain.Document
@@ -10,7 +10,7 @@ import org.sejin.wikihexagonal.document.domain.DocumentSnapshot
 
 class AmendDocumentService(
     private val readDocumentPort: ReadDocumentPort,
-    private val amendDocumentPort: AmendDocumentPort,
+    private val updateDocumentPort: UpdateDocumentPort,
     private val createDocumentSnapshotPort: CreateDocumentSnapshotPort,
 ) : AmendDocumentUseCase {
     override fun amendDocument(command: AmendDocumentCommand) {
@@ -27,10 +27,10 @@ class AmendDocumentService(
         val appendedDocumentSnapshot: DocumentSnapshot =
             createDocumentSnapshotPort.createDocumentSnapshot(documentSnapshot = amendedVersionSnapshot)
 
-        document.amend(documentSnapshot = appendedDocumentSnapshot)
-        amendDocumentPort.amendDocument(
+        val amendedDocument = document.amend(documentSnapshot = appendedDocumentSnapshot)
+        updateDocumentPort.updateDocument(
             documentId = documentId,
-            document = document,
+            document = amendedDocument,
         )
     }
 }

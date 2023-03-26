@@ -2,15 +2,19 @@ package org.sejin.wikihexagonal.document.domain
 
 data class Document(
     val id: DocumentId?,
-    var status: DocumentStatus,
-    val snapshots: MutableList<DocumentSnapshot>,
+    val status: DocumentStatus,
+    val snapshots: List<DocumentSnapshot>,
 ) {
-    fun amend(documentSnapshot: DocumentSnapshot) {
-        snapshots.add(documentSnapshot)
+    fun amend(documentSnapshot: DocumentSnapshot): Document {
+        return this.copy(
+            snapshots = snapshots.plus(documentSnapshot)
+        )
     }
 
-    fun delete() {
-        this.status = DocumentStatus.DELETED
+    fun delete(): Document {
+        return this.copy(
+            status = DocumentStatus.DELETED
+        )
     }
 
     fun getLatestSnapshot(): DocumentSnapshot =
@@ -29,7 +33,7 @@ data class Document(
             return Document(
                 id = null,
                 status = DocumentStatus.ON_DISPLAY,
-                snapshots = mutableListOf(documentSnapshot),
+                snapshots = listOf(documentSnapshot),
             )
         }
     }
