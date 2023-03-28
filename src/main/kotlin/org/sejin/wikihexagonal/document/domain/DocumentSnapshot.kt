@@ -12,12 +12,12 @@ data class DocumentSnapshot(
     val createdAt: LocalDateTime,
 ) {
     fun amend(
-        title: String = this.title,
-        content: String = this.content,
+        title: String?,
+        content: String?,
     ): DocumentSnapshot {
         return this.copy(
-            title = title,
-            content = content,
+            title = title ?: this.title,
+            content = content ?: this.content,
             createdAt = LocalDateTime.now(),
         )
     }

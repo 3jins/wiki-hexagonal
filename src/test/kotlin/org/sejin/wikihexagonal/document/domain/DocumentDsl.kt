@@ -2,13 +2,14 @@ package org.sejin.wikihexagonal.document.domain
 
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.domain.MemberId
+import java.time.LocalDateTime
 
 @DslMarker
 annotation class DocumentDsl
 
 fun documentWithFullData() =
     faker.randomProvider.randomClassInstance<DocumentBuilder>()
-        .buildWithWrite()
+        .build()
 
 fun document(
     authorId: MemberId,
@@ -50,20 +51,16 @@ data class DocumentBuilder(
         return this
     }
 
-    fun buildWithWrite() = Document.write(
-        authorId = this.authorId,
-        title = this.title,
-        content = this.content,
-    )
-
     fun build() = Document(
         id = this.id,
         authorId = this.authorId,
         status = this.status,
         snapshots = listOf(
-            DocumentSnapshot.write(
+            DocumentSnapshot(
+                id = DocumentSnapshotId(faker.random.nextLong()),
                 title = this.title,
                 content = this.content,
+                createdAt = LocalDateTime.now(),
             )
         ),
     )

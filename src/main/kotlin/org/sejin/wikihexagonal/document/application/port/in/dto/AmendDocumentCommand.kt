@@ -4,6 +4,6 @@ import org.sejin.wikihexagonal.document.domain.DocumentId
 
 data class AmendDocumentCommand(
     val documentId: DocumentId,
-    val title: String,
-    val content: String,
+    val title: String?,
+    val content: String?,
 )
