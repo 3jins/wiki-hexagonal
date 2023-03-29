@@ -42,6 +42,7 @@ internal class DocumentSnapshotTest {
 
             assertDoesNotThrow {
                 documentSnapshot.amend(
+                    title = faker.onePiece.characters(),
                     content = faker.onePiece.quotes(),
                 )
             }
@@ -57,6 +58,7 @@ internal class DocumentSnapshotTest {
             )
 
             val amendedVersionSnapshot = documentSnapshot.amend(
+                title = null,
                 content = faker.heroesOfTheStorm.quotes(),
             )
             amendedVersionSnapshot.title.shouldBeEqualTo(documentSnapshot.title)

@@ -23,9 +23,12 @@ dependencies {
 	val kotlinFakerVersion = "1.13.0"
 	val kluentVersion = "1.72"
 	val markdownVersion = "0.4.1"
+	val jacksonVersion = "2.14.2"
 	val mockkVersion = "1.13.3"
+	val springmockkVersion = "4.0.2"
 
 	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains:markdown:$markdownVersion")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -33,6 +36,8 @@ dependencies {
 	testImplementation("io.github.serpro69:kotlin-faker:$kotlinFakerVersion")
 	testImplementation("org.amshove.kluent:kluent:$kluentVersion")
 	testImplementation("io.mockk:mockk:$mockkVersion")
+	testImplementation("com.ninja-squad:springmockk:$springmockkVersion")
+	testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 }
 
 tasks.withType<KotlinCompile> {
