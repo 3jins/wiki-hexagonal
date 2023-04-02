@@ -36,15 +36,16 @@ internal class SearchDocumentsControllerTest : BaseControllerTest() {
             .andExpect(jsonPath("$.documents[0].latestVersionId").value(fakeDocuments[0].getLatestSnapshot().id!!.value))
             .andExpect(jsonPath("$.documents[0].title").value(fakeDocuments[0].getLatestSnapshot().title))
             .andExpect(jsonPath("$.documents[0].content").value(fakeDocuments[0].getLatestSnapshot().content))
-            .andExpect(jsonPath("$.documents[0].createdAt").value(fakeDocuments[0].snapshots[0].createdAt.toString()))
-            .andExpect(jsonPath("$.documents[0].updatedAt").value(fakeDocuments[0].getLatestSnapshot().createdAt.toString()))
+            .andExpect(jsonPath("$.documents[0].createdAt", LocalDateTimeMatcher(fakeDocuments[0].snapshots[0].createdAt)))
+            .andExpect(jsonPath("$.documents[0].updatedAt", LocalDateTimeMatcher(fakeDocuments[0].getLatestSnapshot().createdAt)))
+
             .andExpect(jsonPath("$.documents[1].documentId").value(fakeDocuments[1].id!!.value))
             .andExpect(jsonPath("$.documents[1].authorId").value(fakeDocuments[1].authorId.value))
             .andExpect(jsonPath("$.documents[1].status").value(fakeDocuments[1].status.name))
             .andExpect(jsonPath("$.documents[1].latestVersionId").value(fakeDocuments[1].getLatestSnapshot().id!!.value))
             .andExpect(jsonPath("$.documents[1].title").value(fakeDocuments[1].getLatestSnapshot().title))
             .andExpect(jsonPath("$.documents[1].content").value(fakeDocuments[1].getLatestSnapshot().content))
-            .andExpect(jsonPath("$.documents[1].createdAt").value(fakeDocuments[1].snapshots[0].createdAt.toString()))
-            .andExpect(jsonPath("$.documents[1].updatedAt").value(fakeDocuments[1].getLatestSnapshot().createdAt.toString()))
+            .andExpect(jsonPath("$.documents[1].createdAt", LocalDateTimeMatcher(fakeDocuments[1].snapshots[0].createdAt)))
+            .andExpect(jsonPath("$.documents[1].updatedAt", LocalDateTimeMatcher(fakeDocuments[1].getLatestSnapshot().createdAt)))
     }
 }

@@ -1,11 +1,14 @@
 package org.sejin.wikihexagonal
 
+import org.hamcrest.BaseMatcher
+import org.hamcrest.Description
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import java.time.LocalDateTime
 import java.util.*
 
 internal abstract class BaseControllerTest {
@@ -78,5 +81,27 @@ internal abstract class BaseControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .locale(Locale.KOREA)
         )
+    }
+
+    // `jsonPath` converts LocalDateTime to a String without the last zero digit when its nanosecond ends with zero
+    // so that a test using `String.equals` fails with a 10% chance.
+    // This custom matcher is introduced to fix this flaw of controller tests.
+    internal class LocalDateTimeMatcher(
+        private val expectedValue: LocalDateTime,
+    ) : BaseMatcher<LocalDateTime?>() {
+        override fun matches(item: Any): Boolean {
+            val rawData: String = item.toString()
+            val parsed = LocalDateTime.parse(rawData)
+            if (!parsed.equals(expectedValue)) {
+                return false
+            }
+            return true
+        }
+
+        override fun describeTo(description: Description) {
+            description.appendText(
+                String.format("to be \"$expectedValue\"")
+            )
+        }
     }
 }
