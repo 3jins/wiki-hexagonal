@@ -16,7 +16,6 @@ import org.sejin.wikihexagonal.document.domain.document
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.domain.MemberId
-import org.sejin.wikihexagonal.member.domain.memberWithFullData
 
 @DisplayName("SearchDocumentsService")
 internal class SearchDocumentsServiceTest {

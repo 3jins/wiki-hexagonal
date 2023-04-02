@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.sejin.wikihexagonal.faker
-import java.time.LocalDateTime
 
 @DisplayName("DocumentSnapshot")
 internal class DocumentSnapshotTest {

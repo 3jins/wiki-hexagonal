@@ -11,7 +11,6 @@ import org.sejin.wikihexagonal.document.application.port.`in`.dto.WriteDocumentC
 import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentPort
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.domain.MemberId
-import org.sejin.wikihexagonal.member.domain.memberWithFullData
 
 @DisplayName("WriteDocumentService")
 internal class WriteDocumentServiceTest {

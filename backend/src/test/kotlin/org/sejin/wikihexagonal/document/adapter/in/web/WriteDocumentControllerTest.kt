@@ -2,7 +2,6 @@ package org.sejin.wikihexagonal.document.adapter.`in`.web
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.ninjasquad.springmockk.MockkBean
-import io.mockk.every
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.DisplayName
