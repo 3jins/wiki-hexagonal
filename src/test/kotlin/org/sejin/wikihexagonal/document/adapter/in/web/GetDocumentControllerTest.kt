@@ -32,7 +32,7 @@ internal class GetDocumentControllerTest : BaseControllerTest() {
             .andExpect(jsonPath("$.latestVersionId").value(fakeDocument.getLatestSnapshot().id!!.value))
             .andExpect(jsonPath("$.title").value(fakeDocument.getLatestSnapshot().title))
             .andExpect(jsonPath("$.content").value(fakeDocument.getLatestSnapshot().content))
-            .andExpect(jsonPath("$.createdAt").value(fakeDocument.snapshots[0].createdAt.toString()))
-            .andExpect(jsonPath("$.updatedAt").value(fakeDocument.getLatestSnapshot().createdAt.toString()))
+            .andExpect(jsonPath("$.createdAt", LocalDateTimeMatcher(fakeDocument.snapshots[0].createdAt)))
+            .andExpect(jsonPath("$.updatedAt", LocalDateTimeMatcher(fakeDocument.getLatestSnapshot().createdAt)))
     }
 }
