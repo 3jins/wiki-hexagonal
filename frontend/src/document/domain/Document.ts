@@ -1,9 +1,9 @@
-import { MemberId } from '@src/member/domain/Member';
+import Member, { MemberId } from '@src/member/domain/Member';
 import DocumentStatus from '@src/document/domain/DocumentStatus';
 
 export default class Document {
   id?: DocumentId
-  authorId: MemberId
+  author: Member
   status: DocumentStatus
   latestVersionId: DocumentVersionId
   title: string

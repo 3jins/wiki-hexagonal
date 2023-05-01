@@ -10,12 +10,13 @@ import org.sejin.wikihexagonal.BaseControllerTest
 import org.sejin.wikihexagonal.document.adapter.`in`.web.request.AmendDocumentRequest
 import org.sejin.wikihexagonal.document.application.port.`in`.AmendDocumentUseCase
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.web.CorsConfiguration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
-@WebMvcTest(controllers = [AmendDocumentController::class])
+@WebMvcTest(controllers = [AmendDocumentController::class, CorsConfiguration::class])
 @DisplayName("AmendDocumentController")
 internal class AmendDocumentControllerTest : BaseControllerTest() {
 

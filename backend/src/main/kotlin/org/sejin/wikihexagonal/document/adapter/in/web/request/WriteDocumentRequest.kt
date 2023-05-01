@@ -9,7 +9,7 @@ data class WriteDocumentRequest(
     val content: String,
 ) {
     fun toCommand() = WriteDocumentCommand(
-        memberId = MemberId(this.memberId),
+        authorId = MemberId(this.memberId),
         title = this.title,
         content = this.content,
     )

@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test
 import org.sejin.wikihexagonal.BaseControllerTest
 import org.sejin.wikihexagonal.document.application.port.`in`.SearchDocumentsUseCase
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
+import org.sejin.wikihexagonal.web.CorsConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
-@WebMvcTest(controllers = [SearchDocumentsController::class])
+@WebMvcTest(controllers = [SearchDocumentsController::class, CorsConfiguration::class])
 @DisplayName("SearchDocumentsController")
 internal class SearchDocumentsControllerTest : BaseControllerTest() {
 
@@ -31,7 +32,7 @@ internal class SearchDocumentsControllerTest : BaseControllerTest() {
         testByGet("/wiki/documents")
             .andExpect(status().isOk)
             .andExpect(jsonPath("$.documents[0].documentId").value(fakeDocuments[0].id!!.value))
-            .andExpect(jsonPath("$.documents[0].authorId").value(fakeDocuments[0].authorId.value))
+            .andExpect(jsonPath("$.documents[0].author.memberId").value(fakeDocuments[0].author.id.value))
             .andExpect(jsonPath("$.documents[0].status").value(fakeDocuments[0].status.name))
             .andExpect(jsonPath("$.documents[0].latestVersionId").value(fakeDocuments[0].getLatestSnapshot().id!!.value))
             .andExpect(jsonPath("$.documents[0].title").value(fakeDocuments[0].getLatestSnapshot().title))
@@ -40,7 +41,7 @@ internal class SearchDocumentsControllerTest : BaseControllerTest() {
             .andExpect(jsonPath("$.documents[0].updatedAt", LocalDateTimeMatcher(fakeDocuments[0].getLatestSnapshot().createdAt)))
 
             .andExpect(jsonPath("$.documents[1].documentId").value(fakeDocuments[1].id!!.value))
-            .andExpect(jsonPath("$.documents[1].authorId").value(fakeDocuments[1].authorId.value))
+            .andExpect(jsonPath("$.documents[1].author.memberId").value(fakeDocuments[1].author.id.value))
             .andExpect(jsonPath("$.documents[1].status").value(fakeDocuments[1].status.name))
             .andExpect(jsonPath("$.documents[1].latestVersionId").value(fakeDocuments[1].getLatestSnapshot().id!!.value))
             .andExpect(jsonPath("$.documents[1].title").value(fakeDocuments[1].getLatestSnapshot().title))

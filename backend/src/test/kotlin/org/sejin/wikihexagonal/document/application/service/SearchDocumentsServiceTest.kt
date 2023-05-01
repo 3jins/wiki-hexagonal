@@ -16,6 +16,8 @@ import org.sejin.wikihexagonal.document.domain.document
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.domain.MemberId
+import org.sejin.wikihexagonal.member.domain.member
+import org.sejin.wikihexagonal.member.domain.memberWithFullData
 
 @DisplayName("SearchDocumentsService")
 internal class SearchDocumentsServiceTest {
@@ -51,13 +53,13 @@ internal class SearchDocumentsServiceTest {
         }.returns(
             listOf(
                 document(
-                    authorId = fakeMemberIds[0],
+                    author = member(fakeMemberIds[0]),
                     status = fakeStatuses[0],
                     title = fakeTitles[0],
                     content = fakeContents[0],
                 ),
                 document(
-                    authorId = fakeMemberIds[1],
+                    author = member(fakeMemberIds[1]),
                     status = fakeStatuses[1],
                     title = fakeTitles[1],
                     content = fakeContents[1],
