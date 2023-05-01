@@ -1,0 +1,25 @@
+{
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "sourceMap": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "@test/*": [
+        "test/*"
+      ]
+    },
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
+  }
+}
