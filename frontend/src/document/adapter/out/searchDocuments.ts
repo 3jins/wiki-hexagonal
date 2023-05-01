@@ -64,4 +64,4 @@ const convertResponseToDomain = (searchDocumentsResponse: SearchDocumentsRespons
   updatedAt: searchDocumentsResponse.updatedAt,
 });
 
-export default searchDocumentsMock;
+export default import.meta.env.MODE === 'mock' ? searchDocumentsMock : searchDocuments;

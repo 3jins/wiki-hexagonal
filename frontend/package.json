@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "vite build",
-    "dev": "vite dev --port 5913",
+    "mock": "vite dev --mode mock --port 5913",
+    "dev": "vite dev --port 5914",
     "preview": "vite preview"
   },
   "devDependencies": {
