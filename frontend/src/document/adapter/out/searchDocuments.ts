@@ -1,7 +1,5 @@
 import axios from 'axios';
-import SearchDocumentsResponse, {
-  SearchDocumentsResponseAuthorType
-} from '@src/document/application/port/out/response/SearchDocumentsResponse';
+import SearchDocumentsResponse from '@src/document/application/port/out/response/SearchDocumentsResponse';
 import SearchDocumentsRequest from '@src/document/application/port/out/request/SearchDocumentsRequest';
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
 import Document, { DocumentId, DocumentVersionId } from '@src/document/domain/Document';
@@ -91,18 +89,18 @@ const searchDocumentsMock = (request: SearchDocumentsRequest): Document[] => {
   );
 }
 
-const convertResponseToDomain = (searchDocumentsResponse: SearchDocumentsResponse): Document => ({
-  id: new DocumentId(searchDocumentsResponse.documentId),
-  author: new Member(
+const convertResponseToDomain = (searchDocumentsResponse: SearchDocumentsResponse): Document => Document.of(
+  new DocumentId(searchDocumentsResponse.documentId),
+  Member.of(
     new MemberId(searchDocumentsResponse.author.memberId),
     searchDocumentsResponse.author.name,
   ),
-  status: searchDocumentsResponse.status,
-  latestVersionId: new DocumentVersionId(searchDocumentsResponse.latestVersionId),
-  title: searchDocumentsResponse.title,
-  content: searchDocumentsResponse.content,
-  createdAt: searchDocumentsResponse.createdAt,
-  updatedAt: searchDocumentsResponse.updatedAt,
-});
+  searchDocumentsResponse.status,
+  new DocumentVersionId(searchDocumentsResponse.latestVersionId),
+  searchDocumentsResponse.title,
+  searchDocumentsResponse.content,
+  searchDocumentsResponse.createdAt,
+  searchDocumentsResponse.updatedAt,
+);
 
 export default import.meta.env.MODE === 'mock' ? searchDocumentsMock : searchDocuments;
