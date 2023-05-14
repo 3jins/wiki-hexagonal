@@ -7,17 +7,19 @@
     "build": "vite build",
     "mock": "vite dev --mode mock --port 5913",
     "dev": "vite dev --port 5914",
-    "preview": "vite preview"
+    "test": "vitest"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/config": "^3.3.0",
     "@types/node": "^18.16.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^5.0.3",
+    "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.31.0"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.0.0",
