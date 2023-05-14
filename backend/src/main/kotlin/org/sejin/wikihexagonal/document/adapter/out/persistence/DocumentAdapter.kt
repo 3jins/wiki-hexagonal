@@ -5,6 +5,7 @@ import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.domain.*
+import org.sejin.wikihexagonal.member.domain.Member
 import org.sejin.wikihexagonal.member.domain.MemberId
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
@@ -24,17 +25,20 @@ class DocumentAdapter : CreateDocumentPort, UpdateDocumentPort, ReadDocumentPort
 
     override fun searchDocuments(query: SearchDocumentsQuery): List<Document> {
         return mockedData.filter { document ->
-            query.authorId?.let { document.authorId == query.authorId } ?: true &&
-                    query.status?.let { document.status == query.status } ?: true &&
-                    query.title?.let { document.getLatestSnapshot().title.contains(query.title) } ?: true &&
-                    query.content?.let { document.getLatestSnapshot().content.contains(query.content) } ?: true
+            query.authorId?.let { document.author.id == query.authorId } ?: true &&
+                query.status?.let { document.status == query.status } ?: true &&
+                query.title?.let { document.getLatestSnapshot().title.contains(query.title) } ?: true &&
+                query.content?.let { document.getLatestSnapshot().content.contains(query.content) } ?: true
         }
     }
 
     private val mockedData = listOf(
         Document(
             id = DocumentId(1),
-            authorId = MemberId(1),
+            author = Member(
+                id = MemberId(value = 1L),
+                name = "Sejin Jeon",
+            ),
             status = DocumentStatus.ON_DISPLAY,
             snapshots = listOf(
                 DocumentSnapshot(
@@ -59,7 +63,10 @@ class DocumentAdapter : CreateDocumentPort, UpdateDocumentPort, ReadDocumentPort
         ),
         Document(
             id = DocumentId(2),
-            authorId = MemberId(1),
+            author = Member(
+                id = MemberId(value = 1L),
+                name = "Sejin Jeon",
+            ),
             status = DocumentStatus.ON_DISPLAY,
             snapshots = listOf(
                 DocumentSnapshot(

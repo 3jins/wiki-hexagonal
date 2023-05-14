@@ -6,7 +6,9 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.member.domain.Member
 import org.sejin.wikihexagonal.member.domain.MemberId
+import org.sejin.wikihexagonal.member.domain.memberWithFullData
 import java.time.LocalDateTime
 
 @DisplayName("Document")
@@ -18,16 +20,16 @@ internal class DocumentTest {
         @DisplayName("should be written when valid data are given")
         @Test
         fun shouldBeWrittenWithValidData() {
-            val fakeAuthorId: MemberId = faker.randomProvider.randomClassInstance()
+            val fakeAuthor: Member = memberWithFullData()
             val document: Document = Document.write(
-                authorId = fakeAuthorId,
+                author = fakeAuthor,
                 title = faker.onePiece.characters(),
                 content = faker.onePiece.quotes(),
             )
 
             document.shouldNotBeNull()
             document.id.shouldBeNull()
-            document.authorId.shouldBeEqualTo(fakeAuthorId)
+            document.author.shouldBeEqualTo(fakeAuthor)
             document.status.shouldBeEqualTo(DocumentStatus.ON_DISPLAY)
         }
 
@@ -38,7 +40,7 @@ internal class DocumentTest {
             val fakeContent = faker.onePiece.quotes()
 
             val document: Document = Document.write(
-                authorId = faker.randomProvider.randomClassInstance(),
+                author = memberWithFullData(),
                 title = fakeTitle,
                 content = fakeContent,
             )

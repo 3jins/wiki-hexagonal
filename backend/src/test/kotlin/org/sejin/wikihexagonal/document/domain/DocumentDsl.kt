@@ -1,6 +1,7 @@
 package org.sejin.wikihexagonal.document.domain
 
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.member.domain.Member
 import org.sejin.wikihexagonal.member.domain.MemberId
 import java.time.LocalDateTime
 
@@ -12,12 +13,12 @@ fun documentWithFullData() =
         .build()
 
 fun document(
-    authorId: MemberId,
+    author: Member,
     status: DocumentStatus,
     title: String,
     content: String,
 ) = faker.randomProvider.randomClassInstance<DocumentBuilder>()
-    .authorId(authorId)
+    .author(author)
     .status(status)
     .title(title)
     .content(content)
@@ -26,13 +27,13 @@ fun document(
 @DocumentDsl
 data class DocumentBuilder(
     val id: DocumentId,
-    var authorId: MemberId,
+    var author: Member,
     var status: DocumentStatus,
     var title: String,
     var content: String,
 ) {
-    fun authorId(authorId: MemberId): DocumentBuilder {
-        this.authorId = authorId
+    fun author(author: Member): DocumentBuilder {
+        this.author = author
         return this
     }
 
@@ -53,7 +54,7 @@ data class DocumentBuilder(
 
     fun build() = Document(
         id = this.id,
-        authorId = this.authorId,
+        author = this.author,
         status = this.status,
         snapshots = listOf(
             DocumentSnapshot(

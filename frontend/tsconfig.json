@@ -1,13 +1,14 @@
 {
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "exclude": [
     "node_modules"
   ],
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "CommonJS",
     "sourceMap": true,
     "strict": true,
     "baseUrl": ".",

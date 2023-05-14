@@ -2,7 +2,7 @@ import DocumentStatus from '@src/document/domain/DocumentStatus';
 
 type SearchDocumentsResponse = {
     documentId: number,
-    authorId: number,
+    author: SearchDocumentsResponseAuthorType,
     status: DocumentStatus,
     latestVersionId: number,
     title: string,
@@ -10,4 +10,10 @@ type SearchDocumentsResponse = {
     createdAt: Date,
     updatedAt: Date,
 }
+
+type SearchDocumentsResponseAuthorType = {
+    memberId: number,
+    name: string,
+}
+
 export default SearchDocumentsResponse;

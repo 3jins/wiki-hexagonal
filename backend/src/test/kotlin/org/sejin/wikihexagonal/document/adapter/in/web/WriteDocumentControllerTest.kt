@@ -10,12 +10,13 @@ import org.sejin.wikihexagonal.BaseControllerTest
 import org.sejin.wikihexagonal.document.adapter.`in`.web.request.WriteDocumentRequest
 import org.sejin.wikihexagonal.document.application.port.`in`.WriteDocumentUseCase
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.web.CorsConfiguration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
-@WebMvcTest(controllers = [WriteDocumentController::class])
+@WebMvcTest(controllers = [WriteDocumentController::class, CorsConfiguration::class])
 @DisplayName("WriteDocumentController")
 internal class WriteDocumentControllerTest : BaseControllerTest() {
 
@@ -43,7 +44,7 @@ internal class WriteDocumentControllerTest : BaseControllerTest() {
         verify {
             writeDocumentUseCase.writeDocument(
                 withArg {
-                    it.memberId.value.shouldBeEqualTo(fakeMemberId)
+                    it.authorId.value.shouldBeEqualTo(fakeMemberId)
                     it.title.shouldBeEqualTo(fakeTitle)
                     it.content.shouldBeEqualTo(fakeContent)
                 }

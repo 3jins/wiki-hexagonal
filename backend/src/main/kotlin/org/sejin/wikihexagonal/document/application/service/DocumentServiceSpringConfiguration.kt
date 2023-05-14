@@ -4,6 +4,7 @@ import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.CreateDocumentSnapshotPort
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
+import org.sejin.wikihexagonal.member.application.port.out.ReadMemberPort
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -13,10 +14,14 @@ class DocumentServiceSpringConfiguration(
     private val readDocumentPort: ReadDocumentPort,
     private val updateDocumentPort: UpdateDocumentPort,
     private val createDocumentSnapshotPort: CreateDocumentSnapshotPort,
+    private val readMemberPort: ReadMemberPort,
 ) {
     @Bean
     fun writeDocumentService(): WriteDocumentService {
-        return WriteDocumentService(createDocumentPort = createDocumentPort)
+        return WriteDocumentService(
+            createDocumentPort = createDocumentPort,
+            readMemberPort = readMemberPort,
+        )
     }
 
     @Bean

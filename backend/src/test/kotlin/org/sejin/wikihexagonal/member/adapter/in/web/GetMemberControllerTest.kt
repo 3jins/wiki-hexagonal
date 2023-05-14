@@ -9,11 +9,12 @@ import org.sejin.wikihexagonal.BaseControllerTest
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.application.port.`in`.GetMemberUseCase
 import org.sejin.wikihexagonal.member.domain.memberWithFullData
+import org.sejin.wikihexagonal.web.CorsConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@WebMvcTest(controllers = [GetMemberController::class])
+@WebMvcTest(controllers = [GetMemberController::class, CorsConfiguration::class])
 @DisplayName("GetMemberController")
 internal class GetMemberControllerTest : BaseControllerTest() {
 

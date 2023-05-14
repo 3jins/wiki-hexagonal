@@ -8,12 +8,13 @@ import org.sejin.wikihexagonal.BaseControllerTest
 import org.sejin.wikihexagonal.document.application.port.`in`.GetDocumentUseCase
 import org.sejin.wikihexagonal.document.domain.documentWithFullData
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.web.CorsConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
-@WebMvcTest(controllers = [GetDocumentController::class])
+@WebMvcTest(controllers = [GetDocumentController::class, CorsConfiguration::class])
 @DisplayName("GetDocumentController")
 internal class GetDocumentControllerTest : BaseControllerTest() {
 
@@ -27,7 +28,8 @@ internal class GetDocumentControllerTest : BaseControllerTest() {
 
         testByGet("/wiki/documents/${faker.random.nextLong()}")
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.authorId").value(fakeDocument.authorId.value))
+            .andExpect(jsonPath("$.author.memberId").value(fakeDocument.author.id.value))
+            .andExpect(jsonPath("$.author.name").value(fakeDocument.author.name))
             .andExpect(jsonPath("$.status").value(fakeDocument.status.name))
             .andExpect(jsonPath("$.latestVersionId").value(fakeDocument.getLatestSnapshot().id!!.value))
             .andExpect(jsonPath("$.title").value(fakeDocument.getLatestSnapshot().title))
