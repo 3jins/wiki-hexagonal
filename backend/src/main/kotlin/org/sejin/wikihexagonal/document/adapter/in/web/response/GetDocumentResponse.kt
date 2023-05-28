@@ -36,7 +36,7 @@ data class GetDocumentResponse(
                 "스냅샷의 ID가 없습니다: documentId: ${document.id}, title: ${document.getLatestSnapshot().title}"
             }.value,
             title = document.getLatestSnapshot().title,
-            content = document.getLatestSnapshot().content,
+            content = document.getLatestSnapshot().renderContent(),
             createdAt = document.snapshots[0].createdAt,
             updatedAt = document.getLatestSnapshot().createdAt,
         )
