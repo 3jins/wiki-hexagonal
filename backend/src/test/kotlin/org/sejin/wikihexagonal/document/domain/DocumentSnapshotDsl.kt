@@ -1,6 +1,7 @@
 package org.sejin.wikihexagonal.document.domain
 
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.member.domain.Member
 import java.time.LocalDateTime
 
 @DslMarker
@@ -33,6 +34,7 @@ data class DocumentSnapshotBuilder(
     var id: DocumentSnapshotId,
     var title: String,
     var content: String,
+    var createdBy: Member,
     var createdAt: LocalDateTime,
 ) {
     fun title(title: String): DocumentSnapshotBuilder {
@@ -49,6 +51,7 @@ data class DocumentSnapshotBuilder(
         id = this.id,
         title = this.title,
         content = this.content,
+        createdBy = this.createdBy,
         createdAt = this.createdAt,
     )
 }

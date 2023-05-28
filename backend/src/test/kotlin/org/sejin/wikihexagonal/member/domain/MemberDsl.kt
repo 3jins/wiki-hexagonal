@@ -12,6 +12,7 @@ fun member(id: MemberId) =
 
 fun memberWithFullData() =
     faker.randomProvider.randomClassInstance<MemberBuilder>()
+        .name(faker.random.randomString(length = 30))
         .build()
 
 @MemberDsl
@@ -21,6 +22,11 @@ data class MemberBuilder(
 ) {
     fun id(id: MemberId): MemberBuilder {
         this.id = id
+        return this
+    }
+
+    fun name(name: String): MemberBuilder {
+        this.name = name
         return this
     }
 

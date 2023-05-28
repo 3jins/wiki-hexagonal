@@ -17,7 +17,6 @@ class DeleteDocumentService(
 
         val deletedDocument: Document = document.delete()
         updateDocumentPort.updateDocument(
-            documentId = documentId,
             document = deletedDocument,
         )
     }

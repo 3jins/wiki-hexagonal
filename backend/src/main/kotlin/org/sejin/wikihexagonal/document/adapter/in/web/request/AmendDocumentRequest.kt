@@ -7,9 +7,13 @@ data class AmendDocumentRequest(
     val title: String?,
     val content: String?,
 ) {
-    fun toCommand(documentId: Long) = AmendDocumentCommand(
+    fun toCommand(
+        documentId: Long,
+        requestMemberId: Long,
+    ) = AmendDocumentCommand(
         documentId = DocumentId(documentId),
         title = this.title,
         content = this.content,
+        requestMemberId = requestMemberId,
     )
 }

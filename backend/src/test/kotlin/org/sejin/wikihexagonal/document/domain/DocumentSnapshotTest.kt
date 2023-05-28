@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.sejin.wikihexagonal.faker
+import org.sejin.wikihexagonal.member.domain.Member
+import org.sejin.wikihexagonal.member.domain.memberWithFullData
 
 @DisplayName("DocumentSnapshot")
 internal class DocumentSnapshotTest {
@@ -17,16 +19,19 @@ internal class DocumentSnapshotTest {
         fun shouldBeWrittenWithValidData() {
             val fakeTitle = faker.onePiece.characters()
             val fakeContent = faker.onePiece.quotes()
+            val fakeMember: Member = memberWithFullData()
 
             val documentSnapshot: DocumentSnapshot = DocumentSnapshot.write(
                 title = fakeTitle,
                 content = fakeContent,
+                createdBy = fakeMember,
             )
 
             documentSnapshot.shouldNotBeNull()
             documentSnapshot.id.shouldBeNull()
             documentSnapshot.title.shouldBeEqualTo(fakeTitle)
             documentSnapshot.content.shouldBeEqualTo(fakeContent)
+            documentSnapshot.createdBy.shouldBeEqualTo(fakeMember)
         }
     }
 
@@ -38,14 +43,16 @@ internal class DocumentSnapshotTest {
         fun shouldBeUpdatedWithValidData() {
             val documentSnapshot: DocumentSnapshot = documentSnapshotWithFullData()
             val originalId = documentSnapshot.id
+            val fakeMember: Member = memberWithFullData()
 
-            assertDoesNotThrow {
-                documentSnapshot.amend(
-                    title = faker.onePiece.characters(),
-                    content = faker.onePiece.quotes(),
-                )
-            }
-            documentSnapshot.id.shouldBeEqualTo(originalId)
+            val amendedDocuemntSnapshot: DocumentSnapshot = documentSnapshot.amend(
+                title = faker.onePiece.characters(),
+                content = faker.onePiece.quotes(),
+                createdBy = fakeMember,
+            )
+
+            amendedDocuemntSnapshot.id.shouldBeEqualTo(originalId)
+            amendedDocuemntSnapshot.createdBy.shouldBeEqualTo(fakeMember)
         }
 
         @DisplayName("should update only with given data")
@@ -54,12 +61,15 @@ internal class DocumentSnapshotTest {
             val documentSnapshot: DocumentSnapshot = DocumentSnapshot.write(
                 title = faker.onePiece.characters(),
                 content = faker.onePiece.quotes(),
+                createdBy = memberWithFullData(),
             )
 
             val amendedVersionSnapshot = documentSnapshot.amend(
                 title = null,
                 content = faker.heroesOfTheStorm.quotes(),
+                createdBy = memberWithFullData(),
             )
+
             amendedVersionSnapshot.title.shouldBeEqualTo(documentSnapshot.title)
             amendedVersionSnapshot.content.shouldNotBeEqualTo(documentSnapshot.content)
         }

@@ -13,6 +13,7 @@ import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.web.CorsConfiguration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.http.HttpHeaders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.util.*
 
@@ -31,13 +32,20 @@ internal class AmendDocumentControllerTest : BaseControllerTest() {
         val fakeDocumentId = faker.random.nextLong()
         val fakeTitle = faker.onePiece.characters()
         val fakeContent = faker.onePiece.quotes()
+        val fakeRequestMemberId = faker.random.nextLong()
 
         val request = AmendDocumentRequest(
             title = fakeTitle,
             content = fakeContent
         )
 
-        testByPatch("/wiki/documents/${fakeDocumentId}", objectMapper.writeValueAsString(request))
+        val httpHeaders = HttpHeaders()
+        httpHeaders.set("requestMemberId", fakeRequestMemberId.toString())
+        testByPatch(
+            uri = "/wiki/documents/${fakeDocumentId}",
+            body = objectMapper.writeValueAsString(request),
+            headers = httpHeaders,
+        )
             .andExpect(status().isOk)
 
         verify {
@@ -46,6 +54,7 @@ internal class AmendDocumentControllerTest : BaseControllerTest() {
                     it.documentId.value.shouldBeEqualTo(fakeDocumentId)
                     it.title.shouldBeEqualTo(fakeTitle)
                     it.content.shouldBeEqualTo(fakeContent)
+                    it.requestMemberId.shouldBeEqualTo(fakeRequestMemberId)
                 }
             )
         }
