@@ -1,15 +1,17 @@
 package org.sejin.wikihexagonal.document.application.service
 
+import org.sejin.wikihexagonal.common.Transactional
 import org.sejin.wikihexagonal.document.application.port.`in`.DeleteDocumentUseCase
 import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.domain.Document
 import org.sejin.wikihexagonal.document.domain.DocumentId
 
-class DeleteDocumentService(
+open class DeleteDocumentService(
     private val readDocumentPort: ReadDocumentPort,
     private val updateDocumentPort: UpdateDocumentPort,
 ) : DeleteDocumentUseCase {
+    @Transactional
     override fun deleteDocument(documentId: DocumentId) {
         val document: Document = checkNotNull(
             readDocumentPort.loadDocument(documentId = documentId),
