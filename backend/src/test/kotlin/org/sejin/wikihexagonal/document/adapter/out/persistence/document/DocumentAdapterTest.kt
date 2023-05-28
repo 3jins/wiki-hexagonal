@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.test.annotation.DirtiesContext
 import java.time.LocalDateTime
 
 @DataJpaTest
+@DirtiesContext
 @ComponentScan(basePackages = ["org.sejin.wikihexagonal.document.adapter.out.persistence"])
 class DocumentAdapterTest {
     @Autowired
