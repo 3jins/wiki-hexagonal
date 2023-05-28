@@ -2,7 +2,7 @@ package org.sejin.wikihexagonal.document.domain
 
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.domain.Member
-import org.sejin.wikihexagonal.member.domain.MemberId
+import org.sejin.wikihexagonal.member.domain.memberWithFullData
 import java.time.LocalDateTime
 
 @DslMarker
@@ -10,6 +10,7 @@ annotation class DocumentDsl
 
 fun documentWithFullData() =
     faker.randomProvider.randomClassInstance<DocumentBuilder>()
+        .author(memberWithFullData())
         .build()
 
 fun document(
@@ -22,6 +23,12 @@ fun document(
     .status(status)
     .title(title)
     .content(content)
+    .build()
+
+fun document(
+    author: Member,
+) = faker.randomProvider.randomClassInstance<DocumentBuilder>()
+    .author(author)
     .build()
 
 @DocumentDsl
@@ -62,6 +69,7 @@ data class DocumentBuilder(
                 title = this.title,
                 content = this.content,
                 createdAt = LocalDateTime.now(),
+                createdBy = this.author,
             )
         ),
     )

@@ -16,7 +16,15 @@ class AmendDocumentController(
 
         @RequestBody
         request: AmendDocumentRequest,
+
+        @RequestHeader
+        requestMemberId: Long,
     ) {
-        amendDocumentUseCase.amendDocument(command = request.toCommand(documentId))
+        amendDocumentUseCase.amendDocument(
+            command = request.toCommand(
+                documentId = documentId,
+                requestMemberId = requestMemberId,
+            ),
+        )
     }
 }

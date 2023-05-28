@@ -6,4 +6,5 @@ data class AmendDocumentCommand(
     val documentId: DocumentId,
     val title: String?,
     val content: String?,
+    val requestMemberId: Long,
 )

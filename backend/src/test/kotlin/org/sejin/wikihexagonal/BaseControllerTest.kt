@@ -1,8 +1,10 @@
 package org.sejin.wikihexagonal
 
+import com.ninjasquad.springmockk.MockkBean
 import org.hamcrest.BaseMatcher
 import org.hamcrest.Description
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
@@ -14,6 +16,9 @@ import java.util.*
 internal abstract class BaseControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
+
+    @MockkBean(relaxed = true)
+    private lateinit var jpaMetamodelMappingContext: JpaMetamodelMappingContext
 
     protected fun testByGet(uri: String): ResultActions {
         return testByGet(
@@ -38,6 +43,16 @@ internal abstract class BaseControllerTest {
         )
     }
 
+    protected fun testByPatch(uri: String, body: String, headers: HttpHeaders): ResultActions {
+        return mockMvc.perform(
+            MockMvcRequestBuilders.patch(uri)
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .locale(Locale.KOREA)
+                .content(body)
+        )
+    }
+
     protected fun testByDelete(uri: String): ResultActions {
         return testByDelete(
             uri = uri,
@@ -57,16 +72,6 @@ internal abstract class BaseControllerTest {
     private fun testByPost(uri: String, body: String, headers: HttpHeaders): ResultActions {
         return mockMvc.perform(
             MockMvcRequestBuilders.post(uri)
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .locale(Locale.KOREA)
-                .content(body)
-        )
-    }
-
-    private fun testByPatch(uri: String, body: String, headers: HttpHeaders): ResultActions {
-        return mockMvc.perform(
-            MockMvcRequestBuilders.patch(uri)
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .locale(Locale.KOREA)

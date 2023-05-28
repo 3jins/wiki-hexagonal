@@ -40,9 +40,6 @@ internal class DeleteDocumentServiceTest {
         verify {
             updateDocumentPort.updateDocument(
                 withArg {
-                    it.shouldBeEqualTo(fakeDocumentId)
-                },
-                withArg {
                     it.status.shouldBeEqualTo(DocumentStatus.DELETED)
                 },
             )

@@ -32,6 +32,7 @@ data class Document(
             val documentSnapshot = DocumentSnapshot.write(
                 title = title,
                 content = content,
+                createdBy = author,
             )
 
             return Document(
@@ -41,6 +42,18 @@ data class Document(
                 snapshots = listOf(documentSnapshot),
             )
         }
+
+        fun of(
+            id: DocumentId,
+            author: Member,
+            status: DocumentStatus,
+            snapshots: List<DocumentSnapshot>,
+        ) = Document(
+            id = id,
+            author = author,
+            status = status,
+            snapshots = snapshots,
+        )
     }
 }
 
