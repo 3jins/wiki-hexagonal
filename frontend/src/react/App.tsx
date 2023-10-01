@@ -5,6 +5,7 @@ import DocumentsPage from '@src/react/page/DocumentsPage';
 import AppContainer from '@src/react/component/organism/AppContainer';
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
 import DocumentDetailPage from '@src/react/page/DocumentDetailPage';
+import WriteDocumentPage from '@src/react/page/WriteDocumentPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +30,10 @@ export default () => {
               <Route
                 path={`${DOCUMENT_URI}/:documentId`}
                 element={<DocumentDetailPage/>}
+              />
+              <Route
+                path={`${DOCUMENT_URI}/new`}
+                element={<WriteDocumentPage/>}
               />
             </Routes>
           </BrowserRouter>

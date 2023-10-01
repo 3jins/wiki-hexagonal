@@ -4,12 +4,11 @@ import org.sejin.wikihexagonal.document.application.port.`in`.dto.WriteDocumentC
 import org.sejin.wikihexagonal.member.domain.MemberId
 
 data class WriteDocumentRequest(
-    val memberId: Long,
     val title: String,
     val content: String,
 ) {
-    fun toCommand() = WriteDocumentCommand(
-        authorId = MemberId(this.memberId),
+    fun toCommand(memberId: MemberId) = WriteDocumentCommand(
+        authorId = memberId,
         title = this.title,
         content = this.content,
     )

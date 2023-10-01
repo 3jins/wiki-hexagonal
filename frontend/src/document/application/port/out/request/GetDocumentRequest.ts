@@ -1,5 +1,7 @@
 type GetDocumentRequest = {
-  documentId: string,
+  params: {
+    documentId: string,
+  }
 };
 
 export default GetDocumentRequest;

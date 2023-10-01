@@ -21,7 +21,7 @@ const searchDocuments = async (request: SearchDocumentsRequest): Promise<Documen
   );
 };
 
-const searchDocumentsMock = (request: SearchDocumentsRequest): Document[] => mockedDocuments.map(
+const searchDocumentsMock = async (request: SearchDocumentsRequest): Promise<Document[]> => mockedDocuments.map(
   (searchDocumentsResponse: SearchDocumentsResponse) => convertResponseToDomain(searchDocumentsResponse),
 );
 
