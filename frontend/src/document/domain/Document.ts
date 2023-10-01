@@ -55,13 +55,17 @@ export default class Document {
     );
   }
 
-  public getThumbnailContent(): string {
-    const bareContent: string = this.getTextContents(
+  public getHtmlContent(): string {
+    return this.getTextContents(
       (new DOMParser()).parseFromString(
         this.content,
         'text/html',
       ).body,
     ).join(' ');
+  }
+
+  public getThumbnailContent(): string {
+    const bareContent: string = this.getHtmlContent();
 
     const croppedContent = bareContent.substring(0, THUMBNAIL_SIZE);
 

@@ -18,15 +18,12 @@ export default () => {
   }
 
   const documents: Undefinedable<Document[]> = searchDocumentsQueryResponse?.pages[0];
+  console.log('summary', documents);
 
   return (
     <section>
       <DocumentsList>
-        {
-          documents?.map((document: Document) => DocumentSummaryTemplate({
-            document: document,
-          }))
-        }
+        {documents?.map((document: Document) => DocumentSummaryTemplate({ document }))}
       </DocumentsList>
     </section>
   );

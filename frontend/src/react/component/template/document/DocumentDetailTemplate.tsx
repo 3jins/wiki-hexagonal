@@ -7,10 +7,10 @@ import RenderedArticle from '@src/react/component/molecule/RenderedArticle';
 import ClickableListItem from '@src/react/component/molecule/ClickableListItem';
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
 
-type DocumentSummaryTemplateProps = {
+type DocumentDetailTemplateProps = {
   document: Document,
 }
-const DocumentSummaryTemplate = (props: DocumentSummaryTemplateProps) => {
+const DocumentDetailTemplate = (props: DocumentDetailTemplateProps) => {
   const { document } = props;
 
   return (
@@ -23,10 +23,10 @@ const DocumentSummaryTemplate = (props: DocumentSummaryTemplateProps) => {
       <PlainParagraph>작성일: {moment(document.createdAt).format('lll')}</PlainParagraph>
       <PlainParagraph>마지막 수정일: {moment(document.updatedAt).format('lll')}</PlainParagraph>
       <RenderedArticle>
-        {parse(document.getThumbnailContent())}
+        {parse(document.getHtmlContent())}
       </RenderedArticle>
     </ClickableListItem>
   );
 };
 
-export default DocumentSummaryTemplate;
+export default DocumentDetailTemplate;
