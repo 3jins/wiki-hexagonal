@@ -34,7 +34,7 @@ data class DocumentSnapshot(
             markdownText = this.content,
             root = parsedTree,
             flavour = flavour,
-        ).generateHtml()
+        ).generateHtml().drop("<html>".length).dropLast("</html>".length)
     }
 
     companion object {
