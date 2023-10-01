@@ -16,7 +16,7 @@ const DocumentSummaryTemplate = (props: DocumentSummaryTemplateProps) => {
   return (
     <ClickableListItem
       key={`document-${document.id?.value}`}
-      linkUrl={`/document/${document.id?.value}`}
+      to={`/document/${document.id?.value}`}
     >
       <h2>{document.title}</h2>
       <PlainParagraph>작성자: {document.author.name}</PlainParagraph>

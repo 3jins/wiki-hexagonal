@@ -8,7 +8,8 @@
   ],
   "compilerOptions": {
     "target": "ESNext",
-    "module": "CommonJS",
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
     "sourceMap": true,
     "strict": true,
     "baseUrl": ".",

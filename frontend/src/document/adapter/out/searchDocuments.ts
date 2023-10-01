@@ -4,6 +4,7 @@ import SearchDocumentsRequest from '@src/document/application/port/out/request/S
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
 import Document, { DocumentId, DocumentVersionId } from '@src/document/domain/Document';
 import Member, { MemberId } from '@src/member/domain/Member';
+import DocumentStatus from '@src/document/domain/DocumentStatus';
 
 const searchDocuments = async (request: SearchDocumentsRequest): Promise<Document[]> => {
   const baseUrl = import.meta.env.VITE_BASE_API_URL;
@@ -29,7 +30,7 @@ const searchDocumentsMock = (request: SearchDocumentsRequest): Document[] => {
           memberId: 5,
           name: '용용',
         },
-        status: 'ON_DISPLAY',
+        status: DocumentStatus.ON_DISPLAY,
         latestVersionId: 4,
         title: '빙그레 verse 1',
         content: '<p>눈앞에 널린 바다</p>' +
@@ -51,8 +52,8 @@ const searchDocumentsMock = (request: SearchDocumentsRequest): Document[] => {
           '<p>부레 없는 돌고래처럼</p>' +
           '<p>어릴 적에 내가 불쌍하다 여겼던</p>' +
           '<p>Dolphin 나를 보고 비웃는 듯해</p>',
-        createdAt: '2023-03-26T15:00:00',
-        updatedAt: '2023-03-27T17:00:00'
+        createdAt: new Date('2023-03-26T15:00:00'),
+        updatedAt: new Date('2023-03-27T17:00:00'),
       },
       {
         documentId: 12,
@@ -60,7 +61,7 @@ const searchDocumentsMock = (request: SearchDocumentsRequest): Document[] => {
           memberId: 6,
           name: '디핵',
         },
-        status: 'ON_DISPLAY',
+        status: DocumentStatus.ON_DISPLAY,
         latestVersionId: 2,
         title: '빙그레 verse 2',
         content: '<p>빙글 뱅글 난</p>' +
@@ -76,8 +77,8 @@ const searchDocumentsMock = (request: SearchDocumentsRequest): Document[] => {
           '<p>아프고 많이 아팠다고</p>' +
           '<p>혼잣말하다가</p>' +
           '<p>잠에 들어버릴 것만 같아</p>',
-        createdAt: '2023-03-27T15:00:00',
-        updatedAt: '2023-03-27T15:00:00'
+        createdAt: new Date('2023-03-27T15:00:00'),
+        updatedAt: new Date('2023-03-27T15:00:00'),
       }
     ]
   };
