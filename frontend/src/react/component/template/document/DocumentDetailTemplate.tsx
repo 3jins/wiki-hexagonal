@@ -18,7 +18,7 @@ const DocumentDetailTemplate = (props: DocumentDetailTemplateProps) => {
       <PlainParagraph>작성일: {moment(document.createdAt).format('lll')}</PlainParagraph>
       <PlainParagraph>마지막 수정일: {moment(document.updatedAt).format('lll')}</PlainParagraph>
       <RenderedArticle>
-        {parse(document.getHtmlContent())}
+        {parse(document.content)}
       </RenderedArticle>
     </React.Fragment>
   );
