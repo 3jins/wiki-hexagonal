@@ -1,3 +1,3 @@
-const DOCUMENT_URI: string = '/wiki/documents';
+const DOCUMENT_URI: string = '/documents';
 
 export { DOCUMENT_URI };
