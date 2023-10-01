@@ -7,6 +7,7 @@ import org.sejin.wikihexagonal.document.application.port.out.ReadDocumentPort
 import org.sejin.wikihexagonal.document.application.port.out.UpdateDocumentPort
 import org.sejin.wikihexagonal.document.domain.Document
 import org.sejin.wikihexagonal.document.domain.DocumentId
+import org.sejin.wikihexagonal.member.domain.MemberId
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -17,10 +18,10 @@ class DocumentAdapter(
     val documentSnapshotRepository: DocumentSnapshotRepository,
 ) : CreateDocumentPort, UpdateDocumentPort, ReadDocumentPort {
     @Transactional(readOnly = false)
-    override fun createDocument(document: Document): Long {
+    override fun createDocument(document: Document): MemberId {
         val documentEntity = DocumentEntity.initialOf(document)
         documentSnapshotRepository.saveAll(documentEntity.documentSnapshots)
-        return documentRepository.save(documentEntity).id
+        return MemberId(value = documentRepository.save(documentEntity).id)
     }
 
     @Transactional(readOnly = false)

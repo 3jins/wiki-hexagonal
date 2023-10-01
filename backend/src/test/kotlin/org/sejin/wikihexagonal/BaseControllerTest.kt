@@ -35,6 +35,16 @@ internal abstract class BaseControllerTest {
         )
     }
 
+    protected fun testByPost(uri: String, body: String, headers: HttpHeaders): ResultActions {
+        return mockMvc.perform(
+            MockMvcRequestBuilders.post(uri)
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .locale(Locale.KOREA)
+                .content(body),
+        )
+    }
+
     protected fun testByPatch(uri: String, body: String): ResultActions {
         return testByPatch(
             uri = uri,
@@ -49,7 +59,7 @@ internal abstract class BaseControllerTest {
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .locale(Locale.KOREA)
-                .content(body)
+                .content(body),
         )
     }
 
@@ -65,17 +75,7 @@ internal abstract class BaseControllerTest {
             MockMvcRequestBuilders.get(uri)
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .locale(Locale.KOREA)
-        )
-    }
-
-    private fun testByPost(uri: String, body: String, headers: HttpHeaders): ResultActions {
-        return mockMvc.perform(
-            MockMvcRequestBuilders.post(uri)
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .locale(Locale.KOREA)
-                .content(body)
+                .locale(Locale.KOREA),
         )
     }
 
@@ -84,7 +84,7 @@ internal abstract class BaseControllerTest {
             MockMvcRequestBuilders.delete(uri)
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .locale(Locale.KOREA)
+                .locale(Locale.KOREA),
         )
     }
 
@@ -105,7 +105,7 @@ internal abstract class BaseControllerTest {
 
         override fun describeTo(description: Description) {
             description.appendText(
-                String.format("to be \"$expectedValue\"")
+                String.format("to be \"$expectedValue\""),
             )
         }
     }

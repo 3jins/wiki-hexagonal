@@ -48,12 +48,12 @@ class DocumentAdapterTest {
             val documentId = documentAdapter.createDocument(document = fakeDocument)
 
             // then
-            val documentEntity: DocumentEntity? = documentRepository.findByIdOrNull(id = documentId)
+            val documentEntity: DocumentEntity? = documentRepository.findByIdOrNull(id = documentId.value)
             documentEntity.shouldNotBeNull()
             documentEntity.author.toDomain().shouldBeEqualTo(fakeDocument.author)
             documentEntity.status.shouldBeEqualTo(fakeDocument.status)
             documentEntity.documentSnapshots.shouldHaveSize(1)
-            documentEntity.documentSnapshots[0].document.id.shouldBeEqualTo(documentId)
+            documentEntity.documentSnapshots[0].document.id.shouldBeEqualTo(documentId.value)
             documentEntity.documentSnapshots[0].title.shouldBeEqualTo(fakeDocument.snapshots[0].title)
             documentEntity.documentSnapshots[0].content.shouldBeEqualTo(fakeDocument.snapshots[0].content)
             documentEntity.documentSnapshots[0].createdBy.toDomain().shouldBeEqualTo(fakeDocument.author)
@@ -183,10 +183,10 @@ class DocumentAdapterTest {
 
             val fakeDocument1Id: Long = documentAdapter.createDocument(
                 document = document(author = fakeMemberEntity.toDomain()),
-            )
+            ).value
             val fakeDocument2Id: Long = documentAdapter.createDocument(
                 document = document(author = fakeMemberEntity.toDomain()),
-            )
+            ).value
 
             fakeDocuments = listOf(
                 documentRepository.findByIdOrNull(fakeDocument1Id)!!.toDomain(),
@@ -204,7 +204,7 @@ class DocumentAdapterTest {
                     status = fakeDocuments[0].status,
                     title = fakeDocuments[0].getLatestSnapshot().title,
                     content = fakeDocuments[0].getLatestSnapshot().content,
-                )
+                ),
             )
 
             // then
@@ -229,7 +229,7 @@ class DocumentAdapterTest {
                     status = null,
                     title = null,
                     content = null,
-                )
+                ),
             )
 
             // then
@@ -246,7 +246,7 @@ class DocumentAdapterTest {
                     status = null,
                     title = "한글로 쓰면 절대 매칭되지 않겠지",
                     content = null,
-                )
+                ),
             )
 
             // then
