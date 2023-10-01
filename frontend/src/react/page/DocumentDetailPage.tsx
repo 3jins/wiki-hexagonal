@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import Document from '@src/document/domain/Document';
 import { Undefinedable } from '@src/type';
@@ -13,10 +12,10 @@ export default () => {
   if (!documentId) {
     // TODO: 에러페이지 만들기
     alert('잘못된 요청입니다');
-    return;
+    return null;
   }
 
-  const request: GetDocumentRequest = { documentId };
+  const request: GetDocumentRequest = { params: { documentId } };
   const {
     isLoading: isDocumentLoading,
     data: getDocumentQueryResponse,
@@ -30,9 +29,8 @@ export default () => {
   if (!document) {
     // TODO: 에러페이지 만들기
     alert('존재하지 않는 페이지입니다.');
-    return;
+    return null;
   }
-
 
   return (
     <section>
@@ -40,7 +38,3 @@ export default () => {
     </section>
   );
 }
-
-const DocumentsList = styled.ul`
-  padding: 0;
-`;

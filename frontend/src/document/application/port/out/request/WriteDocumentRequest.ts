@@ -1,5 +1,11 @@
-type GetDocumentRequest = {
-  documentId: string,
+type WriteDocumentRequest = {
+  params: {
+    title: string,
+    content: string,
+  },
+  headers: {
+    requestMemberId: string,
+  },
 };
 
-export default GetDocumentRequest;
+export default WriteDocumentRequest;
