@@ -10,13 +10,13 @@ data class Document(
 ) {
     fun amend(documentSnapshot: DocumentSnapshot): Document {
         return this.copy(
-            snapshots = snapshots.plus(documentSnapshot)
+            snapshots = snapshots.plus(documentSnapshot),
         )
     }
 
     fun delete(): Document {
         return this.copy(
-            status = DocumentStatus.DELETED
+            status = DocumentStatus.DELETED,
         )
     }
 

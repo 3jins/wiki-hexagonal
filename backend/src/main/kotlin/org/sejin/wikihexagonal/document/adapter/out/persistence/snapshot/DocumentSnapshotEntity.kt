@@ -4,7 +4,6 @@ import jakarta.persistence.*
 import org.sejin.wikihexagonal.document.adapter.out.persistence.DocumentEntity
 import org.sejin.wikihexagonal.document.domain.DocumentSnapshot
 import org.sejin.wikihexagonal.member.adapter.out.persistence.MemberEntity
-import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 

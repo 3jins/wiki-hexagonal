@@ -42,7 +42,7 @@ class DocumentEntity(
         this.documentSnapshots = this.documentSnapshots.plus(newSnapshotEntity)
     }
 
-    fun toDomain(): Document{
+    fun toDomain(): Document {
         val author: Member = Member.of(
             id = MemberId(this.author.id),
             name = this.author.name,

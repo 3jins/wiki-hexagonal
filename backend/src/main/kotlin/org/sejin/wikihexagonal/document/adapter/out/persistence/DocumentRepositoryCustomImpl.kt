@@ -19,9 +19,10 @@ class DocumentRepositoryCustomImpl : DocumentRepositoryCustom, QuerydslRepositor
             .where(
                 query.authorId?.let { memberEntity.id.eq(it.value) },
                 query.status?.let { documentEntity.status.eq(it) },
-                query.title?.let { documentSnapshotEntity.title.like("%${it}%") },
-                query.content?.let { documentSnapshotEntity.content.like("%${it}%") },
+                query.title?.let { documentSnapshotEntity.title.like("%$it%") },
+                query.content?.let { documentSnapshotEntity.content.like("%$it%") },
             )
+            .orderBy(documentSnapshotEntity.createdAt.desc())
             .fetch()
     }
 }
