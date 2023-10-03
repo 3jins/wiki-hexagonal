@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.sejin.wikihexagonal.faker
 import org.sejin.wikihexagonal.member.domain.Member
-import org.sejin.wikihexagonal.member.domain.MemberId
 import org.sejin.wikihexagonal.member.domain.memberWithFullData
 import java.time.LocalDateTime
 
