@@ -2,9 +2,9 @@ import React from 'react';
 import moment from 'moment/moment';
 import parse from 'html-react-parser';
 import Document from '@src/document/domain/Document';
-import PlainParagraph from '@src/react/component/atom/PlainParagraph';
-import RenderedArticle from '@src/react/component/molecule/RenderedArticle';
-import ClickableListItem from '@src/react/component/molecule/ClickableListItem';
+import PlainParagraph from '@src/react/component/atom/paragraph/Paragraph';
+import RenderedArticle from '@src/react/component/atom/article/Article';
+import ClickableListItem from '@src/react/component/atom/clickableListItem/ClickableListItem';
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
 
 type DocumentSummaryTemplateProps = {

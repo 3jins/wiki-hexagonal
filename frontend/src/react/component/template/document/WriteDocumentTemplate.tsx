@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
-import Label from '@src/react/component/atom/Label';
-import FileInput from '@src/react/component/atom/FileInput';
+import Label from '@src/react/component/atom/label/Label';
+import FileInput from '@src/react/component/atom/fileInput/FileInput';
 
 type WriteDocumentTemplateProps = {
   setUploadedPostFile: Dispatch<FileList | null>,
@@ -17,8 +17,6 @@ const WriteDocumentTemplate = (props: WriteDocumentTemplateProps) => {
       </Label>
       <FileInput
         id={documentFileInputId}
-        type="file"
-        name="file"
         accept=".md"
         onChange={e => props.setUploadedPostFile(e.target!.files)}
       />
