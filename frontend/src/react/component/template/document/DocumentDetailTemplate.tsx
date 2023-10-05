@@ -2,8 +2,8 @@ import React from 'react';
 import moment from 'moment/moment';
 import parse from 'html-react-parser';
 import Document from '@src/document/domain/Document';
-import PlainParagraph from '@src/react/component/atom/PlainParagraph';
-import RenderedArticle from '@src/react/component/molecule/RenderedArticle';
+import PlainParagraph from '@src/react/component/atom/paragraph/Paragraph';
+import RenderedArticle from '@src/react/component/atom/article/Article';
 
 type DocumentDetailTemplateProps = {
   document: Document,

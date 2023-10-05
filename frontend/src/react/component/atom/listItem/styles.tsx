@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.li`
+export const ListItemStyled = styled.li`
   list-style: none;
   margin: 3rem 0;
 
