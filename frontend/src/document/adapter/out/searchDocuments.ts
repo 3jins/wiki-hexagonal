@@ -11,7 +11,7 @@ const searchDocuments = async (request: SearchDocumentsRequest): Promise<Documen
 
   const rawResponse = await axios.get(
     baseUrl + DOCUMENT_API_URI,
-    { params: request },
+    { params: request.params },
   );
 
   const searchDocumentsResponses: SearchDocumentsResponse[] = rawResponse.data?.documents || [];

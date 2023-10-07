@@ -1,32 +1,29 @@
-import React from 'react';
-import moment from 'moment/moment';
-import parse from 'html-react-parser';
-import Document from '@src/document/domain/Document';
-import PlainParagraph from '@src/react/component/atom/paragraph/Paragraph';
-import RenderedArticle from '@src/react/component/atom/article/Article';
-import ClickableListItem from '@src/react/component/atom/clickableListItem/ClickableListItem';
-import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
+import React, { Dispatch } from 'react';
+import MultiTypeSearchSection from '@src/react/component/organism/searchSection/MultiTypeSearchSection';
 
-type DocumentSummaryTemplateProps = {
-  document: Document,
+type DocumentSearchTemplateProps = {
+  searchOptions: {
+    value: string,
+    displayName: string,
+    isDefault?: boolean,
+  }[],
+  setSearchType: Dispatch<string>,
+  setSearchText: Dispatch<string>,
+  onWriteDocumentSubmitClicked: () => void,
 }
-const DocumentSummaryTemplate = (props: DocumentSummaryTemplateProps) => {
-  const { document } = props;
-
-  return (
-    <ClickableListItem
-      key={`document-${document.id?.value}`}
-      to={`${DOCUMENT_URI}/${document.id?.value}`}
-    >
-      <h2>{document.title}</h2>
-      <PlainParagraph>작성자: {document.author.name}</PlainParagraph>
-      <PlainParagraph>작성일: {moment(document.createdAt).format('lll')}</PlainParagraph>
-      <PlainParagraph>마지막 수정일: {moment(document.updatedAt).format('lll')}</PlainParagraph>
-      <RenderedArticle>
-        {parse(document.getThumbnailContent())}
-      </RenderedArticle>
-    </ClickableListItem>
-  );
+const DocumentSearchTemplate = (props: DocumentSearchTemplateProps) => {
+  return MultiTypeSearchSection({
+    searchOptions: props.searchOptions.map((searchOption) => ({
+      key: `document-search-option-${searchOption.value}`,
+      value: searchOption.value,
+      displayName: searchOption.displayName,
+    })),
+    setSearchType: props.setSearchType,
+    textInputId: 'search-text-input',
+    setSearchText: props.setSearchText,
+    buttonText: '검색',
+    onSubmitClicked: props.onWriteDocumentSubmitClicked,
+  });
 };
 
-export default DocumentSummaryTemplate;
+export default DocumentSearchTemplate;
