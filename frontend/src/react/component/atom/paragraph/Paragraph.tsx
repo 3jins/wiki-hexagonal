@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
-import { ParagraphStyled } from '@src/react/component/atom/paragraph/styles';
+import { StyledParagraph } from '@src/react/component/atom/paragraph/styles';
 
-export default (props: HTMLAttributes<HTMLParagraphElement>) => <ParagraphStyled>
+export default (props: HTMLAttributes<HTMLParagraphElement>) => <StyledParagraph>
   {props.children}
-</ParagraphStyled>;
+</StyledParagraph>;

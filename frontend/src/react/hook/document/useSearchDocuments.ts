@@ -6,7 +6,7 @@ import Document from '@src/document/domain/Document';
 
 const useSearchDocuments = (request: SearchDocumentsRequest) =>
   useInfiniteQuery<Document[]>(
-    [...DocumentsQueryKeys.LIST, request],
+    [...DocumentsQueryKeys.LIST],
     () => searchDocuments(request),
   );
 

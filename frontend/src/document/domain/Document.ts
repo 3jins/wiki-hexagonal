@@ -60,7 +60,7 @@ export default class Document {
       (new DOMParser()).parseFromString(
         this.content,
         'text/html',
-      ).body,
+      ).body as HTMLHtmlElement,
     ).join(' ');
 
     const croppedContent = bareContent.substring(0, THUMBNAIL_SIZE);
@@ -75,14 +75,14 @@ export default class Document {
   ): string[] {
     const textContents: string[] = [];
     if (node.childElementCount == 0) {
-      if (node.textContent.length > 0) {
+      if (node.textContent && node.textContent.length > 0) {
         textContents.push(node.textContent);
       }
       return textContents;
     }
 
-    node.childNodes.forEach((childNode: HTMLHtmlElement) => {
-      this.getTextContents(childNode).forEach((textContent) => {
+    node.childNodes.forEach((childNode: ChildNode) => {
+      this.getTextContents(childNode as HTMLHtmlElement).forEach((textContent) => {
         textContents.push(textContent);
       })
     });

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const StyledFileInput = styled.input`
+export const StyledTextInput = styled.input`
   margin: 0.5rem 0;
 `;

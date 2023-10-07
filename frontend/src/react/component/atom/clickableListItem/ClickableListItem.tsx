@@ -1,14 +1,12 @@
 import React, { HTMLAttributes } from 'react';
-import { ClickableListItemStyled } from '@src/react/component/atom/clickableListItem/styles';
+import { StyledClickableListItem } from '@src/react/component/atom/clickableListItem/styles';
 
 interface ClickableListItemProps extends HTMLAttributes<HTMLElement> {
-  key: string;
   to: string;
 }
 
-export default (props: ClickableListItemProps) => <ClickableListItemStyled
-  key={props.key}
+export default (props: ClickableListItemProps) => <StyledClickableListItem
   to={props.to}
 >
   {props.children}
-</ClickableListItemStyled>;
+</StyledClickableListItem>;

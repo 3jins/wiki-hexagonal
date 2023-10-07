@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
-import { ArticleStyled } from '@src/react/component/atom/article/styles';
+import { StyledArticle } from '@src/react/component/atom/article/styles';
 
-export default (props: HTMLAttributes<any>) => <ArticleStyled>
+export default (props: HTMLAttributes<any>) => <StyledArticle>
   {props.children}
-</ArticleStyled>;
+</StyledArticle>;
