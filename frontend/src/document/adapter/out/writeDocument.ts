@@ -7,7 +7,7 @@ const writeDocument = async (request: WriteDocumentRequest): Promise<string> => 
 
   const rawResponse = await axios.post(
     baseUrl + DOCUMENT_API_URI,
-    request.params,
+    request.body,
     {
       headers: request.headers,
     }

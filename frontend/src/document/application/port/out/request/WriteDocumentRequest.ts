@@ -1,10 +1,10 @@
 type WriteDocumentRequest = {
-  params: {
+  body: {
     title: string,
     content: string,
   },
   headers: {
-    requestMemberId: string,
+    requestMemberId: number,
   },
 };
 

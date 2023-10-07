@@ -7,15 +7,17 @@ import useGetDocument from '@src/react/hook/document/useGetDocument';
 import DocumentDetailTemplate from '@src/react/component/template/document/DocumentDetailTemplate';
 
 export default () => {
-  const { documentId } = useParams();
+  const { documentId: rawDocumentId } = useParams();
 
-  if (!documentId) {
+  if (!rawDocumentId || isNaN(Number(rawDocumentId))) {
     // TODO: 에러페이지 만들기
     alert('잘못된 요청입니다');
     return null;
   }
 
-  const request: GetDocumentRequest = { params: { documentId } };
+  const documentId = Number(rawDocumentId);
+
+  const request: GetDocumentRequest = { documentId };
   const {
     isLoading: isDocumentLoading,
     data: getDocumentQueryResponse,

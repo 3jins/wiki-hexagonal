@@ -1,1 +1,1 @@
-export const REQUEST_MEMBER_ID = '1';
+export const REQUEST_MEMBER_ID = 1;

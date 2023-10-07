@@ -27,7 +27,7 @@ export default () => {
     const fileName = post.name.normalize('NFC');
     const fileExtension = fileName.split('.').reverse()[0]
     const request: WriteDocumentRequest = {
-      params: {
+      body: {
         title: fileName.slice(0, -(fileExtension.length + 1)),
         content: await post.text(),
       },

@@ -11,7 +11,7 @@ const getDocument = async (request: GetDocumentRequest): Promise<Undefinedable<D
   const baseUrl = import.meta.env.VITE_BASE_API_URL;
 
   const rawResponse = await axios.get(
-    `${baseUrl}${DOCUMENT_API_URI}/${request.params.documentId}`,
+    `${baseUrl}${DOCUMENT_API_URI}/${request.documentId}`,
   );
 
   const getDocumentResponse: Undefinedable<GetDocumentResponse> = rawResponse.data;
@@ -21,7 +21,7 @@ const getDocument = async (request: GetDocumentRequest): Promise<Undefinedable<D
 
 const getDocumentMock = async (request: GetDocumentRequest): Promise<Undefinedable<Document>> => {
   const documentMock = mockedDocuments.find(
-    mockedDocument => mockedDocument.documentId.toString() === request.params.documentId,
+    mockedDocument => mockedDocument.documentId.toString() === request.documentId,
   );
   return convertResponseToDomain(documentMock);
 }
