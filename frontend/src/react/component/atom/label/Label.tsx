@@ -1,8 +1,8 @@
 import React, { LabelHTMLAttributes } from 'react';
-import { LabelStyled } from '@src/react/component/atom/label/styles';
+import { StyledLabel } from '@src/react/component/atom/label/styles';
 
-export default (props: LabelHTMLAttributes<HTMLLabelElement>) => <LabelStyled
+export default (props: LabelHTMLAttributes<HTMLLabelElement>) => <StyledLabel
   htmlFor={props.htmlFor}
 >
   {props.children}
-</LabelStyled>;
+</StyledLabel>;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const ParagraphStyled = styled.p`
+export const StyledParagraph = styled.p`
   margin: 0.5rem 0;
 `;

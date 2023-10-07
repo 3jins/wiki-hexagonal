@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const LabelStyled = styled.label`
+export const StyledLabel = styled.label`
   margin: 0.5rem 0;
 `;
