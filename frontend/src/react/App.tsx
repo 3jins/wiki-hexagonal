@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ErrorBoundary } from 'react-error-boundary';
 import DocumentsPage from '@src/react/page/DocumentsPage';
 import AppContainer from '@src/react/component/organism/AppContainer';
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
@@ -21,6 +22,9 @@ export default () => {
   return (
     <QueryClientProvider client={queryClient}>
       <React.Fragment>
+        <ErrorBoundary
+          fallbackRender={() => <h1>Uncaught Error Occured</h1>} // TODO: 폴백 처리 화면 필요
+        >
         <AppContainer>
           <BrowserRouter>
             <Routes>
@@ -43,6 +47,7 @@ export default () => {
             </Routes>
           </BrowserRouter>
         </AppContainer>
+        </ErrorBoundary>
       </React.Fragment>
     </QueryClientProvider>
   );
