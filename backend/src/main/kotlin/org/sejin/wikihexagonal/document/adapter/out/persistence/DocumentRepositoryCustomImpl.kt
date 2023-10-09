@@ -22,7 +22,7 @@ class DocumentRepositoryCustomImpl : DocumentRepositoryCustom, QuerydslRepositor
                 query.title?.let { documentSnapshotEntity.title.like("%$it%") },
                 query.content?.let { documentSnapshotEntity.content.like("%$it%") },
             )
-            .orderBy(documentSnapshotEntity.createdAt.desc())
+            .orderBy(documentEntity.id.desc())
             .fetch()
     }
 }

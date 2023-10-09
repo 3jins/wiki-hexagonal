@@ -1,4 +1,5 @@
-type WriteDocumentRequest = {
+type AmendDocumentRequest = {
+  documentId: number,
   body: {
     title: string,
     content: string,
@@ -8,4 +9,4 @@ type WriteDocumentRequest = {
   },
 };
 
-export default WriteDocumentRequest;
+export default AmendDocumentRequest;

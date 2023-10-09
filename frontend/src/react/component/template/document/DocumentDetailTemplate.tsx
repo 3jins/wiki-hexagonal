@@ -12,7 +12,7 @@ const DocumentDetailTemplate = (props: DocumentDetailTemplateProps) => {
   const { document } = props;
 
   return (
-    <React.Fragment>
+    <section>
       <h2>{document.title}</h2>
       <PlainParagraph>작성자: {document.author.name}</PlainParagraph>
       <PlainParagraph>작성일: {moment(document.createdAt).format('lll')}</PlainParagraph>
@@ -20,7 +20,7 @@ const DocumentDetailTemplate = (props: DocumentDetailTemplateProps) => {
       <RenderedArticle>
         {parse(document.content)}
       </RenderedArticle>
-    </React.Fragment>
+    </section>
   );
 };
 

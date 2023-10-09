@@ -1,36 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import WriteDocumentRequest from '@src/document/application/port/out/request/WriteDocumentRequest';
 import useWriteDocument from '@src/react/hook/document/useWriteDocument';
-import WriteDocumentTemplate from '@src/react/component/template/document/WriteDocumentTemplate';
 import { REQUEST_MEMBER_ID } from '@src/common/TemporarilyHardCoded';
+import UploadDocumentTemplate from '@src/react/component/template/document/UploadDocumentTemplate';
 
 export default () => {
-  const [uploadedPostFile, setUploadedPostFile] = useState<FileList | null>(null);
-
   const {
     mutate: submitWriteDocument,
     isLoading: isDocumentWritePending,
   } = useWriteDocument();
 
-  const onWriteDocumentSubmitClicked = async () => {
-    if (!uploadedPostFile) {
-      alert('업로드 된 파일이 없습니다.');
-      return;
-    }
-
-    const post = uploadedPostFile.item(0)
-    if (!post) {
-      alert('업로드 된 파일이 없습니다.');
-      return;
-    }
-
-    const fileName = post.name.normalize('NFC');
-    const fileExtension = fileName.split('.').reverse()[0]
+  const onUploadedFileAnalyzed = (title: string, content: string) => {
     const request: WriteDocumentRequest = {
-      params: {
-        title: fileName.slice(0, -(fileExtension.length + 1)),
-        content: await post.text(),
-      },
+      body: { title, content },
       headers: {
         requestMemberId: REQUEST_MEMBER_ID,
       }
@@ -45,10 +27,10 @@ export default () => {
 
   return (
     <section>
-      {WriteDocumentTemplate({
-        setUploadedPostFile,
-        onWriteDocumentSubmitClicked,
-      })}
+      <UploadDocumentTemplate
+        buttonText="작성하기"
+        onUploadedFileAnalyzed={onUploadedFileAnalyzed}
+      />
     </section>
   );
 }
