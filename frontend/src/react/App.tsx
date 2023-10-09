@@ -6,6 +6,7 @@ import AppContainer from '@src/react/component/organism/AppContainer';
 import { DOCUMENT_URI } from '@src/document/adapter/out/DocumentUri';
 import DocumentDetailPage from '@src/react/page/DocumentDetailPage';
 import WriteDocumentPage from '@src/react/page/WriteDocumentPage';
+import AmendDocumentPage from '@src/react/page/AmendDocumentPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +35,10 @@ export default () => {
               <Route
                 path={`${DOCUMENT_URI}/new`}
                 element={<WriteDocumentPage/>}
+              />
+              <Route
+                path={`${DOCUMENT_URI}/:documentId/amend`}
+                element={<AmendDocumentPage/>}
               />
             </Routes>
           </BrowserRouter>

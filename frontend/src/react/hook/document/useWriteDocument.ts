@@ -9,11 +9,17 @@ const useWriteDocument = () => {
   return useMutation(
     (request: WriteDocumentRequest) => writeDocument(request),
     {
-      onSuccess: (newDocumentId) => {
+      onSettled: () => {
         queryClient.invalidateQueries(DocumentQueryKeys.LIST);
+      },
+      onSuccess: (newDocumentId) => {
         alert('게시물이 등록되었습니다.');
         window.location.href = `${DOCUMENT_URI}/${newDocumentId}`;
       },
+      onError: () => {
+        alert('게시물 등록에 실패하였습니다.');
+        window.location.reload();
+      }
     }
   );
 }
