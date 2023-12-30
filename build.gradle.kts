@@ -13,6 +13,12 @@ plugins {
     kotlin("kapt") version kotlinVersion
 }
 
+tasks {
+    bootJar {
+        enabled = false
+    }
+}
+
 allprojects {
     group = "org.sejin"
     version = "0.1.0-SNAPSHOT"
